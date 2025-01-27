@@ -25,7 +25,7 @@ export const ResetPassword = () => {
     }
 
     return (
-        <div className='card w-full max-w-lg border border-gray-300 mx-auto mt-10 p-5 shadow-lg rounded-lg'>
+        <div className='card w-full max-w-lg border border-gray-300 mx-auto mt-10 lg:mt-30 p-5 shadow-lg rounded-lg'>
             <form onSubmit={handleSubmit(onSubmit)} className='card-body'>
                 <h1 className='card-title text-2xl font-bold mb-5 text-center'>Reset Password</h1>
 
