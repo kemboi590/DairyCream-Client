@@ -1,0 +1,12 @@
+@import "tailwindcss";
+@plugin "daisyui";
+/* --color-base-100: #254A47; */
+@plugin "daisyui/theme" {
+  name: "dark-but-soft";
+  default: true;
+  --color-primary: blue;
+  --color-secondary: teal;
+  --color-base-100: #F1FAF5;
+
+ /* background color */
+}
