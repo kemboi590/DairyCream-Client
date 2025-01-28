@@ -1,6 +1,7 @@
 import * as yup from 'yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { usersAPI } from '../../../features/login/users/usersAPI'
 
 type FormData = {
   firstName: string;
@@ -26,12 +27,29 @@ const schema = yup.object().shape({
 })
 
 export default function Register() {
+  const [createUser, { error }] = usersAPI.useCreateUserMutation()
+
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: yupResolver(schema)
   })
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    console.log(data)
+    console.log("submitted data", data)
+    try {
+      const responseText = await createUser(data).unwrap()
+      const response = responseText
+      console.log("Response", response.message)
+      alert(response.message)
+    } catch (err) {
+      if (error) {
+        console.log("API Error", error)
+        if ('data' in error && error.data) {
+          console.error("Error details:", error.data);
+          alert(error.data);
+        }
+      }
+      console.error("Error", err)
+    }
   }
 
   return (
