@@ -2,11 +2,8 @@ import * as yup from 'yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { usersAPI } from '../../../features/users/usersAPI'
-<<<<<<< HEAD
 import { useEffect, useState } from 'react'
 import { toast, Toaster } from 'sonner'
-=======
->>>>>>> a730cc699dbbb4651967ba456db08fc50fdfae28
 
 type FormData = {
   firstName: string;

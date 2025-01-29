@@ -5,10 +5,7 @@ import { loginAPI } from '../../../features/login/loginAPI'
 import { Toaster, toast } from 'sonner'
 import { loginSuccess } from '../../../features/users/userSlice'
 import { useDispatch } from 'react-redux'
-<<<<<<< HEAD
 import { useState } from 'react'
-=======
->>>>>>> a730cc699dbbb4651967ba456db08fc50fdfae28
 
 
 type FormData = {
@@ -27,25 +24,16 @@ const schema = yup.object().shape({
 export const Login = () => {
     const dispatch = useDispatch()
     const [loginUser] = loginAPI.useLoginUserMutation()
-<<<<<<< HEAD
     const [isLoggingIn, setIsLoggingIn] = useState(false)
-=======
->>>>>>> a730cc699dbbb4651967ba456db08fc50fdfae28
     const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
         resolver: yupResolver(schema)
     })
 
     const onSubmit: SubmitHandler<FormData> = async (data) => {
-<<<<<<< HEAD
         // console.log(data)
         try {
             // console.log("loggin in....")
             setIsLoggingIn(true)
-=======
-        console.log(data)
-        try {
-            console.log("loggin in....")
->>>>>>> a730cc699dbbb4651967ba456db08fc50fdfae28
             const response = await loginUser(data).unwrap()
             dispatch(loginSuccess(response))
             toast.success("Login successful")
@@ -58,11 +46,8 @@ export const Login = () => {
             } else {
                 console.log("Error", err)
             }
-<<<<<<< HEAD
         } finally {
             setIsLoggingIn(false)
-=======
->>>>>>> a730cc699dbbb4651967ba456db08fc50fdfae28
         }
     }
 
@@ -92,7 +77,6 @@ export const Login = () => {
                         <input type='password' placeholder="Your Password" className='input input-bordered w-full mt-1' {...register("password")} />
                         <p className='text-red-500 text-sm mt-1'>{errors.password?.message}</p>
                     </div>
-<<<<<<< HEAD
                     <div className="form-control mt-2">
                         <button type='submit' className='btn btn-primary w-full mt-4'>
                             {isLoggingIn ? (
@@ -106,10 +90,6 @@ export const Login = () => {
 
                         </button>
                     </div>
-=======
-
-                    <button type='submit' className='btn btn-primary w-full mt-4'>Login</button>
->>>>>>> a730cc699dbbb4651967ba456db08fc50fdfae28
                 </form>
             </div>
         </>
