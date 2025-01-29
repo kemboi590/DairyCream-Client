@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { ApiDomain } from "../../../utils/ApiDomain";
-import { RootState } from "../../../app/store";
+import { ApiDomain } from "../../utils/ApiDomain";
+import { RootState } from "../../app/store";
 
 export interface Tuser {
     id: string;
@@ -31,7 +31,7 @@ export const usersAPI = createApi({
             query: () => 'users',
             providesTags: ['Users']
         }),
-        createUser: builder.mutation<{message: string}, Partial<Tuser>>({
+        createUser: builder.mutation<{ message: string }, Partial<Tuser>>({
             query: (newUser) => ({
                 url: 'api/authentication/register-user',
                 method: 'POST',
