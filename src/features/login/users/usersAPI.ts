@@ -24,7 +24,6 @@ export const usersAPI = createApi({
             headers.set('Content-Type', 'application/json');
             return headers;
         }
-
     }),
     tagTypes: ['Users'],
     endpoints: (builder) => ({
@@ -60,5 +59,4 @@ export const usersAPI = createApi({
             query: (id) => `users/${id}`
         }),
     }),
-
 })

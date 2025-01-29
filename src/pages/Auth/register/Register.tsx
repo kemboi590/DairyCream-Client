@@ -38,8 +38,8 @@ export default function Register() {
     try {
       const responseText = await createUser(data).unwrap()
       const response = responseText
-      console.log("Response", response.message)
-      alert(response.message)
+      console.log("Response", response)
+      alert(response)
     } catch (err) {
       if (error) {
         console.log("API Error", error)
