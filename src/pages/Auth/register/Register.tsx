@@ -1,7 +1,7 @@
 import * as yup from 'yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { usersAPI } from '../../../features/login/users/usersAPI'
+import { usersAPI } from '../../../features/users/usersAPI'
 
 type FormData = {
   firstName: string;

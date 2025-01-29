@@ -1,6 +1,11 @@
 import * as yup from 'yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { loginAPI } from '../../../features/login/loginAPI'
+import { Toaster, toast } from 'sonner'
+import { loginSuccess } from '../../../features/users/userSlice'
+import { useDispatch } from 'react-redux'
+
 
 type FormData = {
     email: string;
@@ -16,34 +21,62 @@ const schema = yup.object().shape({
 })
 
 export const Login = () => {
+    const dispatch = useDispatch()
+    const [loginUser] = loginAPI.useLoginUserMutation()
     const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
         resolver: yupResolver(schema)
     })
 
     const onSubmit: SubmitHandler<FormData> = async (data) => {
         console.log(data)
+        try {
+            console.log("loggin in....")
+            const response = await loginUser(data).unwrap()
+            dispatch(loginSuccess(response))
+            toast.success("Login successful")
+            // console.log("Response data", response.token)
+
+        } catch (err) {
+            if ((err as any).status === 401) {
+                toast.error("Invalid credentials. Please try again.")
+                // console.log("Invalid credentials. Please try again.")
+            } else {
+                console.log("Error", err)
+            }
+        }
     }
 
     return (
-        <div className='card w-full max-w-lg border border-gray-300 mx-auto mt-10 lg:mt-40 p-5 shadow-lg rounded-lg '>
-            <form onSubmit={handleSubmit(onSubmit)} className='card-body'>
-                <h1 className='card-title text-2xl font-bold mb-5 text-center'>Login to your account:</h1>
+        <>
+            <Toaster
+                toastOptions={{
+                    classNames: {
+                        error: 'bg-red-400',
+                        success: 'text-green-400',
+                        warning: 'text-yellow-400',
+                        info: 'bg-blue-400',
+                    },
+                }} />
+            <div className='card w-full max-w-lg border border-gray-300 mx-auto mt-10 lg:mt-40 p-5 shadow-lg rounded-lg '>
+                <form onSubmit={handleSubmit(onSubmit)} className='card-body'>
+                    <h1 className='card-title text-2xl font-bold mb-5 text-center'>Login to your account:</h1>
 
-                <div className='mb-4'>
-                    <label htmlFor='email' className='form-label block text-sm font-medium text-gray-700'>Email <span className='text-red-500'>*</span></label>
-                    <input type='email' placeholder="Your Email" className='input input-bordered w-full mt-1' {...register("email")} />
-                    <p className='text-red-500 text-sm mt-1'>{errors.email?.message}</p>
-                </div>
+                    <div className='mb-4'>
+                        <label htmlFor='email' className='form-label block text-sm font-medium text-gray-700'>Email <span className='text-red-500'>*</span></label>
+                        <input type='email' placeholder="Your Email" className='input input-bordered w-full mt-1' {...register("email")} />
+                        <p className='text-red-500 text-sm mt-1'>{errors.email?.message}</p>
+                    </div>
 
-                <div className='mb-4'>
-                    <label htmlFor='password' className='form-label block text-sm font-medium text-gray-700'>Password <span className='text-red-500'>*</span></label>
-                    <input type='password' placeholder="Your Password" className='input input-bordered w-full mt-1' {...register("password")} />
-                    <p className='text-red-500 text-sm mt-1'>{errors.password?.message}</p>
-                </div>
+                    <div className='mb-4'>
+                        <label htmlFor='password' className='form-label block text-sm font-medium text-gray-700'>Password <span className='text-red-500'>*</span></label>
+                        <input type='password' placeholder="Your Password" className='input input-bordered w-full mt-1' {...register("password")} />
+                        <p className='text-red-500 text-sm mt-1'>{errors.password?.message}</p>
+                    </div>
 
-                <button type='submit' className='btn btn-primary w-full mt-4'>Login</button>
-            </form>
-        </div>
+                    <button type='submit' className='btn btn-primary w-full mt-4'>Login</button>
+                </form>
+            </div>
+        </>
     )
 }
 
