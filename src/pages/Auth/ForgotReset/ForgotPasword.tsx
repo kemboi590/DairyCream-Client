@@ -2,6 +2,10 @@
 import * as yup from 'yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { forgotPasswordAPI } from '../../../features/users/PasswordReset'
+import { Toaster, toast } from 'sonner'
+import { clientUriDomain } from '../../../utils/ClientDomain'
+import { useState } from 'react'
 
 type FormData = {
     email: string;
@@ -12,12 +16,29 @@ const schema = yup.object().shape({
 })
 
 const ForgotPasword = () => {
+    const [isLoading, setisLoading] = useState(false)
+    const [forgotPassword] = forgotPasswordAPI.useForgotPasswordMutation()
     const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
         resolver: yupResolver(schema)
     })
 
     const onSubmit: SubmitHandler<FormData> = async (data) => {
-        console.log(data)
+        const requestData = {
+            ...data,
+            clientUri: `${clientUriDomain}/forgot-password`
+        }
+
+        try {
+            setisLoading(true)
+            const response = await forgotPassword(requestData).unwrap()
+            // console.log("Response data:", response)
+            toast.success(response.toString())
+        } catch (error) {
+            // console.log("Error", error)
+            toast.error("Failed to send password reset link, contact support")
+        } finally {
+            setisLoading(false)
+        }
     }
 
     return (
@@ -34,8 +55,22 @@ const ForgotPasword = () => {
                     <p className='text-red-500 text-sm mt-1'>{errors.email?.message}</p>
                 </div>
 
-                <button type='submit' className='btn btn-primary w-full mt-4'>Submit</button>
+                {/* <button type='submit' className='btn btn-primary w-full mt-4'>Submit</button> */}
+                <div className="form-control">
+                    <button type='submit' className='btn btn-primary w-full mt-4'>
+                        {isLoading ? (
+                            <>
+                                <span className="loading loading-spinner"></span>
+                                <span className='text-text-light'>Please Wait!...</span>
+                            </>
+                        ) : (
+                            <span>Submit</span>
+                        )}
+
+                    </button>
+                </div>
             </form>
+            <Toaster />
         </div>
     )
 }

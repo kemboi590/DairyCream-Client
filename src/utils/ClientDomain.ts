@@ -1,0 +1,1 @@
+export const clientUriDomain = 'http://localhost:5173'
