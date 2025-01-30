@@ -4,7 +4,7 @@ import userSlice from '../features/users/userSlice';
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
 import { loginAPI } from "../features/login/loginAPI";
-import { forgotPasswordAPI } from "../features/users/PasswordReset";
+import { forgotPasswordAPI, resetPasswordAPI } from "../features/users/PasswordReset";
 
 
 const persistConfig = {
@@ -17,6 +17,7 @@ const rootReducer = combineReducers({
     [usersAPI.reducerPath]: usersAPI.reducer,
     [loginAPI.reducerPath]: loginAPI.reducer,
     [forgotPasswordAPI.reducerPath]: forgotPasswordAPI.reducer,
+    [resetPasswordAPI.reducerPath]: resetPasswordAPI.reducer,
     user: userSlice
 })
 
@@ -26,7 +27,8 @@ export const store = configureStore({
     reducer: persistedReducer,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck: false
-    }).concat(usersAPI.middleware).concat(loginAPI.middleware).concat(forgotPasswordAPI.middleware)
+    }).concat(usersAPI.middleware).concat(loginAPI.middleware)
+        .concat(forgotPasswordAPI.middleware).concat(resetPasswordAPI.middleware)
 })
 
 export const persistedStore = persistStore(store)

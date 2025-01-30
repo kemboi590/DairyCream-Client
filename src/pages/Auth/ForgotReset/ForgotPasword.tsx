@@ -25,7 +25,7 @@ const ForgotPasword = () => {
     const onSubmit: SubmitHandler<FormData> = async (data) => {
         const requestData = {
             ...data,
-            clientUri: `${clientUriDomain}/forgot-password`
+            clientUri: `${clientUriDomain}/reset-password`
         }
 
         try {
