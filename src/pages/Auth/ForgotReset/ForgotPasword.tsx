@@ -55,7 +55,6 @@ const ForgotPasword = () => {
                     <p className='text-red-500 text-sm mt-1'>{errors.email?.message}</p>
                 </div>
 
-                {/* <button type='submit' className='btn btn-primary w-full mt-4'>Submit</button> */}
                 <div className="form-control">
                     <button type='submit' className='btn btn-primary w-full mt-4'>
                         {isLoading ? (

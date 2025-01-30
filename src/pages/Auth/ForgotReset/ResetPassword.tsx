@@ -75,8 +75,7 @@ export const ResetPassword = () => {
                     <input type='password' placeholder="Confirm Password" className='input input-bordered w-full mt-1' {...register("confirmPassword")} />
                     <p className='text-red-500 text-sm mt-1'>{errors.confirmPassword?.message}</p>
                 </div>
-
-                {/* <button type='submit' className='btn btn-primary w-full mt-4'>Reset Password</button> */}
+                
                 <div className="form-control">
                     <button type='submit' className='btn btn-primary w-full mt-1'>
                         {isLoading ? (
