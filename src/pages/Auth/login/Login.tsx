@@ -6,6 +6,7 @@ import { Toaster, toast } from 'sonner'
 import { loginSuccess } from '../../../features/users/userSlice'
 import { useDispatch } from 'react-redux'
 import { useState } from 'react'
+import Navbar from '../../../components/navbar/Navbar'
 
 
 type FormData = {
@@ -53,6 +54,7 @@ export const Login = () => {
 
     return (
         <>
+            <Navbar />
             <Toaster
                 toastOptions={{
                     classNames: {

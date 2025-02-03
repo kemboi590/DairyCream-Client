@@ -4,6 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { usersAPI } from '../../../features/users/usersAPI'
 import { useEffect, useState } from 'react'
 import { toast, Toaster } from 'sonner'
+import Navbar from '../../../components/navbar/Navbar'
 
 type FormData = {
   firstName: string;
@@ -62,6 +63,7 @@ export default function Register() {
 
   return (
     <>
+      <Navbar />
       <Toaster
         toastOptions={{
           classNames: {
@@ -76,46 +78,48 @@ export default function Register() {
         <form onSubmit={handleSubmit(onSubmit)} className='card-body'>
           <h1 className='card-title text-2xl font-bold mb-5 text-center'>Create an account with us today:</h1>
 
-          <div className='mb-4'>
-            <label htmlFor='firstName' className='form-label block text-sm font-medium text-gray-700'>First Name <span className='text-red-500'>*</span></label>
-            <input type='text' placeholder="Your First Name" className='input input-bordered w-full mt-1' {...register("firstName")} />
-            <p className='text-red-500 text-sm mt-1'>{errors.firstName?.message}</p>
-          </div>
+          <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
+            <div className='mb-1'>
+              <label htmlFor='firstName' className='form-label block text-sm font-medium text-gray-700'>First Name <span className='text-red-500'>*</span></label>
+              <input type='text' placeholder="Your First Name" className='input input-bordered w-full mt-1' {...register("firstName")} />
+              <p className='text-red-500 text-sm mt-1'>{errors.firstName?.message}</p>
+            </div>
 
-          <div className='mb-4'>
-            <label htmlFor='lastName' className='form-label block text-sm font-medium text-gray-700'>Last Name <span className='text-red-500'>*</span></label>
-            <input type='text' placeholder="Your Last Name" className='input input-bordered w-full mt-1' {...register("lastName")} />
-            <p className='text-red-500 text-sm mt-1'>{errors.lastName?.message}</p>
-          </div>
+            <div className='mb-1'>
+              <label htmlFor='lastName' className='form-label block text-sm font-medium text-gray-700'>Last Name <span className='text-red-500'>*</span></label>
+              <input type='text' placeholder="Your Last Name" className='input input-bordered w-full mt-1' {...register("lastName")} />
+              <p className='text-red-500 text-sm mt-1'>{errors.lastName?.message}</p>
+            </div>
 
-          <div className='mb-4'>
-            <label htmlFor='userName' className='form-label block text-sm font-medium text-gray-700'>Username <span className='text-red-500'>*</span></label>
-            <input type='text' placeholder="Your Username" className='input input-bordered w-full mt-1' {...register("userName")} />
-            <p className='text-red-500 text-sm mt-1'>{errors.userName?.message}</p>
-          </div>
+            <div className='mb-1'>
+              <label htmlFor='userName' className='form-label block text-sm font-medium text-gray-700'>Username <span className='text-red-500'>*</span></label>
+              <input type='text' placeholder="Your Username" className='input input-bordered w-full mt-1' {...register("userName")} />
+              <p className='text-red-500 text-sm mt-1'>{errors.userName?.message}</p>
+            </div>
 
-          <div className='mb-4'>
-            <label htmlFor='email' className='form-label block text-sm font-medium text-gray-700'>Email <span className='text-red-500'>*</span></label>
-            <input type='email' placeholder="Your Email" className='input input-bordered w-full mt-1' {...register("email")} />
-            <p className='text-red-500 text-sm mt-1'>{errors.email?.message}</p>
-          </div>
+            <div className='mb-1'>
+              <label htmlFor='email' className='form-label block text-sm font-medium text-gray-700'>Email <span className='text-red-500'>*</span></label>
+              <input type='email' placeholder="Your Email" className='input input-bordered w-full mt-1' {...register("email")} />
+              <p className='text-red-500 text-sm mt-1'>{errors.email?.message}</p>
+            </div>
 
-          <div className='mb-4'>
-            <label htmlFor='password' className='form-label block text-sm font-medium text-gray-700'>Password <span className='text-red-500'>*</span></label>
-            <input type='password' placeholder="Your Password" className='input input-bordered w-full mt-1' {...register("password")} />
-            <p className='text-red-500 text-sm mt-1'>{errors.password?.message}</p>
-          </div>
+            <div className='mb-1'>
+              <label htmlFor='password' className='form-label block text-sm font-medium text-gray-700'>Password <span className='text-red-500'>*</span></label>
+              <input type='password' placeholder="Your Password" className='input input-bordered w-full mt-1' {...register("password")} />
+              <p className='text-red-500 text-sm mt-1'>{errors.password?.message}</p>
+            </div>
 
-          <div className='mb-4'>
-            <label htmlFor='confirmPassword' className='form-label block text-sm font-medium text-gray-700'>Confirm Password <span className='text-red-500'>*</span></label>
-            <input type='password' placeholder="Confirm Password" className='input input-bordered w-full mt-1' {...register("confirmPassword")} />
-            <p className='text-red-500 text-sm mt-1'>{errors.confirmPassword?.message}</p>
+            <div className='mb-1'>
+              <label htmlFor='confirmPassword' className='form-label block text-sm font-medium text-gray-700'>Confirm Password <span className='text-red-500'>*</span></label>
+              <input type='password' placeholder="Confirm Password" className='input input-bordered w-full mt-1' {...register("confirmPassword")} />
+              <p className='text-red-500 text-sm mt-1'>{errors.confirmPassword?.message}</p>
+            </div>
           </div>
 
           <input type='hidden' value='User' {...register("role")} />
 
           <div className="form-control mt-2">
-            <button type='submit' className='btn btn-primary w-full mt-4'>
+            <button type='submit' className='btn btn-primary w-full'>
               {isLoading ? (
                 <>
                   <span className="loading loading-spinner"></span>
@@ -124,11 +128,8 @@ export default function Register() {
               ) : (
                 <span>Create Account</span>
               )}
-
             </button>
           </div>
-
-          {/* <button type='submit' className='btn btn-primary w-full mt-4'>Register</button> */}
         </form>
       </div>
     </>

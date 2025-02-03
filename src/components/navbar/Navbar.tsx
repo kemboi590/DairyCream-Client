@@ -1,0 +1,55 @@
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+
+export const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false)
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen)
+  }
+
+  return (
+    <div className='navbar bg-gray-600  text-white border-b-2'>
+      <div className='flex-1'>
+        <Link to="/" className='btn btn-ghost normal-case text-xl text-white'>DairyCream</Link>
+      </div>
+      <div className='flex-none'>
+        <div className='lg:hidden'>
+          <button onClick={toggleMenu} className='btn btn-ghost btn-circle text-white'>
+            {isOpen ? (
+              <svg xmlns='http://www.w3.org/2000/svg' className='h-5 w-5' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M6 18L18 6M6 6l12 12' /></svg>
+            ) : (
+              <svg xmlns='http://www.w3.org/2000/svg' className='h-5 w-5' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M4 6h16M4 12h16M4 18h16' /></svg>
+            )}
+          </button>
+        </div>
+        <ul className='menu menu-horizontal px-1 hidden lg:flex'>
+          <li className='textarea-lg'> <Link to="/" className='text-white'>Home</Link></li>
+          <li className='textarea-lg'><Link to="/about" className='text-white'>About</Link></li>
+          <li className='textarea-lg'><Link to="/dashboard" className='text-white'>Dashboard</Link></li>
+          <li className='textarea-lg'><Link to="/contact" className='text-white'>Contact</Link></li>
+          <li className='textarea-lg'><Link to="/register" className='text-white'>Register</Link></li>
+          <li className='textarea-lg'><Link to="/login" className='text-white'>Login</Link></li>
+        </ul>
+      </div>
+
+
+      <div className={`z-10 fixed top-0 left-0 h-full w-64 bg-gray-600 shadow-lg transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out lg:hidden`}>
+        <button onClick={toggleMenu} className='btn btn-ghost btn-circle absolute top-4 right-4 text-white'>
+          <svg xmlns='http://www.w3.org/2000/svg' className='h-5 w-5' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M6 18L18 6M6 6l12 12' /></svg>
+        </button>
+        <ul className='menu p-4'>
+          <li className='textarea-lg'>
+            <Link to="/" onClick={toggleMenu} className='text-white'>Home</Link></li>
+          <li className='textarea-lg'><Link to="/about" onClick={toggleMenu} className='text-white'>About</Link></li>
+          <li className='textarea-lg'><Link to="/dashboard" onClick={toggleMenu} className='text-white'>Dashboard</Link></li>
+          <li className='textarea-lg'><Link to="/contact" onClick={toggleMenu} className='text-white'>Contact</Link></li>
+          <li className='textarea-lg'><Link to="/register" onClick={toggleMenu} className='text-white'>Register</Link></li>
+          <li className='textarea-lg'><Link to="/login" onClick={toggleMenu} className='text-white'>Login</Link></li>
+        </ul>
+      </div>
+    </div>
+  )
+}
+
+export default Navbar
