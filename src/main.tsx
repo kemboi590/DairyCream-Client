@@ -10,6 +10,7 @@ import ResetPassword from './pages/Auth/ForgotReset/ResetPassword.tsx'
 import { persistedStore, store } from './app/store';
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
+import VerifyEmail from './pages/Auth/ForgotReset/VerifyEmail.tsx'
 
 
 const router = createBrowserRouter([
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
     path: 'reset-password',
     element: <ResetPassword />
   },
+  {
+    path: 'verify-email',
+    element: <VerifyEmail />
+  }
 
 ])
 

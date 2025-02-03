@@ -6,6 +6,7 @@ import { Toaster, toast } from 'sonner'
 import { loginSuccess } from '../../../features/users/userSlice'
 import { useDispatch } from 'react-redux'
 import { useState } from 'react'
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from '../../../components/navbar/Navbar'
 
 
@@ -24,6 +25,7 @@ const schema = yup.object().shape({
 
 export const Login = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const [loginUser] = loginAPI.useLoginUserMutation()
     const [isLoggingIn, setIsLoggingIn] = useState(false)
     const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
@@ -39,11 +41,17 @@ export const Login = () => {
             dispatch(loginSuccess(response))
             toast.success("Login successful")
             // console.log("Response data", response.token)
+            setTimeout(() => {
+                navigate('/')
+            }, 1000)
 
-        } catch (err) {
+
+        } catch (err: any) {
             if ((err as any).status === 401) {
-                toast.error("Invalid credentials. Please try again.")
+                // console.log(err.data)
+                toast.error(err.data)
                 // console.log("Invalid credentials. Please try again.")
+
             } else {
                 console.log("Error", err)
             }
@@ -91,6 +99,12 @@ export const Login = () => {
                             )}
 
                         </button>
+
+                        <div className='mt-4 text-center'>
+                            <p>Don't have an account? <a href='/register' className='text-blue-500 hover:underline'>Register</a></p>
+
+                            <p className='mt-2'>Forgot your password? <Link to='/forgot-password' className='text-blue-500 hover:underline'>Forgot Password</Link></p>
+                        </div>
                     </div>
                 </form>
             </div>

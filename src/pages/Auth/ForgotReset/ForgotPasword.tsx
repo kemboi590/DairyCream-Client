@@ -67,6 +67,10 @@ const ForgotPasword = () => {
                         )}
 
                     </button>
+                    {/* BACK TO LOGIN */}
+                    <div className='mt-4 text-center'>
+                        <a href='/login' className='text-blue-500 text-xl'>Back to login</a>
+                    </div>
                 </div>
             </form>
             <Toaster />

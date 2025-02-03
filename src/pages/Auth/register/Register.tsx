@@ -5,6 +5,7 @@ import { usersAPI } from '../../../features/users/usersAPI'
 import { useEffect, useState } from 'react'
 import { toast, Toaster } from 'sonner'
 import Navbar from '../../../components/navbar/Navbar'
+import { useNavigate } from "react-router-dom";
 
 type FormData = {
   firstName: string;
@@ -30,6 +31,7 @@ const schema = yup.object().shape({
 })
 
 export default function Register() {
+  const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false)
   const [createUser, { error }] = usersAPI.useCreateUserMutation()
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
@@ -53,7 +55,11 @@ export default function Register() {
       const responseText = await createUser(data).unwrap()
       const response = responseText
       console.log("Response", response)
-      toast.success("Account created successfully")
+      toast.success("Account created successfully, verify your email to login")
+
+      setTimeout(() => {
+        navigate('/verify-email')
+      }, 1000)
     } catch (err) {
       console.error("Error", err)
     } finally {
@@ -129,6 +135,10 @@ export default function Register() {
                 <span>Create Account</span>
               )}
             </button>
+
+            <p className='text-center mt-3'>
+              Already have an account? <a href='/login' className='text-blue-500'>Login</a>
+            </p>
           </div>
         </form>
       </div>
