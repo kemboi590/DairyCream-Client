@@ -25,9 +25,9 @@ export const Navbar = () => {
         </div>
         <ul className='menu menu-horizontal px-1 hidden lg:flex'>
           <li className='textarea-lg'> <Link to="/" className='text-white'>Home</Link></li>
-          <li className='textarea-lg'><Link to="/about" className='text-white'>About</Link></li>
+          <li className='textarea-lg'><Link to="/about-us" className='text-white'>About</Link></li>
           <li className='textarea-lg'><Link to="/dashboard" className='text-white'>Dashboard</Link></li>
-          <li className='textarea-lg'><Link to="/contact" className='text-white'>Contact</Link></li>
+          <li className='textarea-lg'><Link to="/contact-us" className='text-white'>Contact</Link></li>
           <li className='textarea-lg'><Link to="/register" className='text-white'>Register</Link></li>
           <li className='textarea-lg'><Link to="/login" className='text-white'>Login</Link></li>
         </ul>
@@ -41,9 +41,9 @@ export const Navbar = () => {
         <ul className='menu p-4'>
           <li className='textarea-lg'>
             <Link to="/" onClick={toggleMenu} className='text-white'>Home</Link></li>
-          <li className='textarea-lg'><Link to="/about" onClick={toggleMenu} className='text-white'>About</Link></li>
+          <li className='textarea-lg'><Link to="/about-us" onClick={toggleMenu} className='text-white'>About</Link></li>
           <li className='textarea-lg'><Link to="/dashboard" onClick={toggleMenu} className='text-white'>Dashboard</Link></li>
-          <li className='textarea-lg'><Link to="/contact" onClick={toggleMenu} className='text-white'>Contact</Link></li>
+          <li className='textarea-lg'><Link to="/contact-us" onClick={toggleMenu} className='text-white'>Contact</Link></li>
           <li className='textarea-lg'><Link to="/register" onClick={toggleMenu} className='text-white'>Register</Link></li>
           <li className='textarea-lg'><Link to="/login" onClick={toggleMenu} className='text-white'>Login</Link></li>
         </ul>

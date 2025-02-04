@@ -11,6 +11,8 @@ import { persistedStore, store } from './app/store';
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import VerifyEmail from './pages/Auth/ForgotReset/VerifyEmail.tsx'
+import About from './pages/about/About.tsx'
+import Contact from './pages/contact/Contact.tsx'
 
 
 const router = createBrowserRouter([
@@ -38,6 +40,18 @@ const router = createBrowserRouter([
   {
     path: 'verify-email',
     element: <VerifyEmail />
+  },
+  {
+    path: 'about-us',
+    element: <About />
+  },
+  {
+    path: 'contact-us',
+    element: <Contact />
+  },
+  {
+    path: 'dashboard',
+    element: <div>Dashboard</div>
   }
 
 ])
