@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { FaBars } from "react-icons/fa6";
+import { MdClose } from "react-icons/md";
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -17,9 +19,11 @@ export const Navbar = () => {
         <div className='lg:hidden'>
           <button onClick={toggleMenu} className='btn btn-ghost btn-circle text-white'>
             {isOpen ? (
-              <svg xmlns='http://www.w3.org/2000/svg' className='h-5 w-5' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M6 18L18 6M6 6l12 12' /></svg>
+              // this is the close icon
+              <MdClose size={24} />
             ) : (
-              <svg xmlns='http://www.w3.org/2000/svg' className='h-5 w-5' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M4 6h16M4 12h16M4 18h16' /></svg>
+              // this is the hamburger icon
+              <FaBars size={24} />
             )}
           </button>
         </div>
@@ -36,7 +40,8 @@ export const Navbar = () => {
 
       <div className={`z-10 fixed top-0 left-0 h-full w-64 bg-gray-600 shadow-lg transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out lg:hidden`}>
         <button onClick={toggleMenu} className='btn btn-ghost btn-circle absolute top-4 right-4 text-white'>
-          <svg xmlns='http://www.w3.org/2000/svg' className='h-5 w-5' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M6 18L18 6M6 6l12 12' /></svg>
+          {/* this is the close icon */}
+          <MdClose size={24} />
         </button>
         <ul className='menu p-4'>
           <li className='textarea-lg'>
