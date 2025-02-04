@@ -1,50 +1,87 @@
-# React + TypeScript + Vite
+# DairyCream Frontend Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+DairyCream is an advanced dairy management system designed to help farmers enhance productivity by tracking milk production, sales, inventory, and data visualization. This repository contains the frontend application, built using **React, Tailwind CSS, and DaisyUI**.
 
-Currently, two official plugins are available:
+## Table of Contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Pages](#pages)
+  - [Register](#register)
+  - [Login](#login)
+  - [Welcome](#welcome)
+  - [About](#about)
+  - [Contact](#contact)
+- [Contributing](#contributing)
+- [License](#license)
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **User authentication** – Secure registration and login
+- **Milk production tracking** – Monitor daily yields
+- **Sales management** – Keep track of transactions
+- **Inventory management** – Efficiently manage stock
+- **Data visualization** – Insights through interactive charts
+- **Comprehensive reports** – Generate performance summaries
+- **24/7 support** – Reliable assistance for users
 
-- Configure the top-level `parserOptions` property like this:
+## Installation
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+To set up the DairyCream frontend locally, follow these steps:
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+1. **Clone the repository:**
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+   ```bash
+   git clone https://github.com/kemboi590/DairyCream-Client.git
+   ```
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+2. **Navigate to the project directory:**
+   ```bash
+   cd client
+   ```
+
+3. **Install dependencies:**
+   ```bash
+   pnpm install
+   ```
+
+4. **Start the development server:**
+   ```bash
+   pnpm run dev
+   ```
+
+## Usage
+
+Once the development server is running, you can access the application in your web browser at [http://localhost:3000](http://localhost:3000).
+
+## Pages
+
+### Register
+The **Register** page allows new users to create an account by providing details such as first name, last name, username, email, password, and role.
+
+### Login
+The **Login** page enables users to access their accounts using an email and password. Upon successful login, users are redirected to the homepage.
+
+### Welcome
+The **Welcome** page serves as the homepage, highlighting key features, benefits, testimonials, and a call-to-action.
+
+### About
+The **About** page provides information about DairyCream, including its mission, vision, and values, along with engaging visuals.
+
+### Contact
+The **Contact** page allows users to reach out via a contact form and displays essential contact details like email, phone number, address, and social media links.
+
+## Contributing
+
+We welcome contributions to the DairyCream frontend application! Follow these steps to contribute:
+
+1. **Fork the repository.**
+2. **Create a new branch** for your feature or bug fix.
+3. **Make your changes** and commit them with a clear message.
+4. **Push your changes** to your forked repository.
+5. **Open a pull request** to the main repository.
+
+## License
+
+This project is licensed under the MIT License.
