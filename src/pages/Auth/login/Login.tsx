@@ -72,23 +72,23 @@ export const Login = () => {
                         info: 'bg-blue-400',
                     },
                 }} />
-            <div className='card w-full max-w-lg border border-gray-300 mx-auto mt-10 lg:mt-40 p-5 shadow-lg rounded-lg '>
+            <div className='card w-full max-w-lg border border-gray-300 mx-auto mt-10 lg:mt-16 p-5 shadow-lg rounded-lg '>
                 <form onSubmit={handleSubmit(onSubmit)} className='card-body'>
                     <h1 className='card-title text-2xl font-bold mb-5 text-center'>Login to your account:</h1>
 
-                    <div className='mb-4'>
+                    <div className='mb-1'>
                         <label htmlFor='email' className='form-label block text-sm font-medium text-gray-700'>Email <span className='text-red-500'>*</span></label>
                         <input type='email' placeholder="Your Email" className='input input-bordered w-full mt-1' {...register("email")} />
                         <p className='text-red-500 text-sm mt-1'>{errors.email?.message}</p>
                     </div>
 
-                    <div className='mb-4'>
+                    <div className='mb-1'>
                         <label htmlFor='password' className='form-label block text-sm font-medium text-gray-700'>Password <span className='text-red-500'>*</span></label>
                         <input type='password' placeholder="Your Password" className='input input-bordered w-full mt-1' {...register("password")} />
                         <p className='text-red-500 text-sm mt-1'>{errors.password?.message}</p>
                     </div>
                     <div className="form-control mt-2">
-                        <button type='submit' className='btn btn-primary w-full mt-4'>
+                        <button type='submit' className='btn btn-primary w-full'>
                             {isLoggingIn ? (
                                 <>
                                     <span className="loading loading-spinner"></span>

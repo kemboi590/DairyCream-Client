@@ -80,11 +80,11 @@ export default function Register() {
           },
         }} />
 
-      <div className='card w-full max-w-lg border border-gray-300 mx-auto mt-10 p-5 shadow-lg rounded-lg'>
+      <div className='card w-full max-w-lg border border-gray-300 mx-auto mt-10 lg:mt-16 p-5 shadow-lg rounded-lg'>
         <form onSubmit={handleSubmit(onSubmit)} className='card-body'>
           <h1 className='card-title text-2xl font-bold mb-5 text-center'>Create an account with us today:</h1>
 
-          <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
+          <div className='grid grid-cols-1 lg:grid-cols-2 gap-x-4'>
             <div className='mb-1'>
               <label htmlFor='firstName' className='form-label block text-sm font-medium text-gray-700'>First Name <span className='text-red-500'>*</span></label>
               <input type='text' placeholder="Your First Name" className='input input-bordered w-full mt-1' {...register("firstName")} />
