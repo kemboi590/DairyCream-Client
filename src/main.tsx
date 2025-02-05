@@ -13,45 +13,89 @@ import { PersistGate } from 'redux-persist/integration/react'
 import VerifyEmail from './pages/Auth/ForgotReset/VerifyEmail.tsx'
 import About from './pages/about/About.tsx'
 import Contact from './pages/contact/Contact.tsx'
+import Error from './pages/Error.tsx'
+import { Main } from './pages/dashboard/main/Main.tsx'
+import { MilkProduction } from './pages/dashboard/main/MilkProduction.tsx'
+import { Sales } from './pages/dashboard/main/Sales.tsx'
+import { Inventory } from './pages/dashboard/main/Inventory.tsx'
+import Visualization from './pages/dashboard/main/Visualization.tsx'
+import Profile from './pages/dashboard/main/Profile.tsx'
+import Dashboard from './pages/dashboard/Dashboard.tsx'
 
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Welcome />,
-    errorElement: <div>404</div>,
+    errorElement: <Error />
   },
   {
     path: 'register',
-    element: <Register />
+    element: <Register />,
+    errorElement: <Error />
   },
   {
     path: 'login',
-    element: <Login />
+    element: <Login />,
+    errorElement: <Error />
   },
   {
     path: 'forgot-password',
-    element: <ForgotPasword />
+    element: <ForgotPasword />,
+    errorElement: <Error />
   },
   {
     path: 'reset-password',
-    element: <ResetPassword />
+    element: <ResetPassword />,
+    errorElement: <Error />
   },
   {
     path: 'verify-email',
-    element: <VerifyEmail />
+    element: <VerifyEmail />,
+    errorElement: <Error />
   },
   {
     path: 'about-us',
-    element: <About />
+    element: <About />,
+    errorElement: <Error />
   },
   {
     path: 'contact-us',
-    element: <Contact />
+    element: <Contact />,
+    errorElement: <Error />
+
   },
   {
     path: 'dashboard',
-    element: <div>Dashboard</div>
+    element: <Dashboard />,
+    errorElement: <Error />,
+    children: [
+      {
+        path: 'main',
+        element: <Main />,
+      },
+      {
+        path: 'milk-production',
+        element: <MilkProduction />
+      },
+      {
+        path: 'sales',
+        element: <Sales />
+      },
+      {
+        path: 'inventory-management',
+        element: <Inventory />
+      },
+      {
+        path: 'visualization',
+        element: <Visualization />
+      },
+      {
+        path: 'profile',
+        element: <Profile />
+      }
+
+    ]
   }
 
 ])
