@@ -2,8 +2,8 @@ import healthCows from "../../assets/images/about/healthy cows.jpeg"
 import milkInGlass from "../../assets/images/about/milk in a glass.jpg"
 import FarmerStoreMilk from "../../assets/images/about/a farmer storing milk in containers.jpg"
 import milSaleSupermarket from "../../assets/images/about/milk sale in supermarket.webp"
-import Navbar from "../../components/navbar/Navbar"
-import Footer from "../../components/navbar/Footer"
+import Navbar from "../../components/Navbar"
+import Footer from "../../components/Footer"
 
 export const About = () => {
     return (

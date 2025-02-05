@@ -13,7 +13,8 @@ export const Navbar = () => {
   return (
     <div className='navbar bg-gray-600  text-white border-b-2'>
       <div className='flex-1'>
-        <Link to="/" className='btn btn-ghost normal-case text-xl text-white'>DairyCream</Link>
+        <Link to="/" className='btn btn-ghost normal-case text-xl text-white hidden lg:flex justify-self-start'>
+          DairyCream</Link>
       </div>
       <div className='flex-none'>
         <div className='lg:hidden'>

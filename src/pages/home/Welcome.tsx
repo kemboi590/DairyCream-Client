@@ -1,10 +1,10 @@
-import Navbar from "../../components/navbar/Navbar"
+import Navbar from "../../components/Navbar"
 import welcomePotrait from "../../assets/images/welcome-potrait.jpg"
 import { Features } from "./Features"
 import Benefits from "./Benefits"
 import Testimonials from "./Testimonials"
 import CallToAction from "./CallToAction"
-import Footer from "../../components/navbar/Footer"
+import Footer from "../../components/Footer"
 
 
 const Welcome = () => {

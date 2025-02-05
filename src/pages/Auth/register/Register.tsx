@@ -4,7 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { usersAPI } from '../../../features/users/usersAPI'
 import { useEffect, useState } from 'react'
 import { toast, Toaster } from 'sonner'
-import Navbar from '../../../components/navbar/Navbar'
+import Navbar from '../../../components/Navbar'
 import { useNavigate } from "react-router-dom";
 
 type FormData = {

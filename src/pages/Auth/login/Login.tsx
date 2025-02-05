@@ -7,7 +7,7 @@ import { loginSuccess } from '../../../features/users/userSlice'
 import { useDispatch } from 'react-redux'
 import { useState } from 'react'
 import { Link, useNavigate } from "react-router-dom";
-import Navbar from '../../../components/navbar/Navbar'
+import Navbar from '../../../components/Navbar'
 
 
 type FormData = {
