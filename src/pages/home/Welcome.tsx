@@ -5,16 +5,21 @@ import Benefits from "./Benefits"
 import Testimonials from "./Testimonials"
 import CallToAction from "./CallToAction"
 import Footer from "../../components/Footer"
+import { useSelector } from "react-redux"
+import { RootState } from "../../app/store"
 
 
 const Welcome = () => {
+    const currentUser = useSelector((state: RootState) => state.user);
+    const name = currentUser.user?.firstName;
     return (
         <div>
             <Navbar />
             <div className="hero min-h-[70vh] bg-base-200 ">
                 <div className="hero-content flex-col lg:flex-row justify-between items-center container mx-auto px-4">
                     <div className="text-center lg:text-left lg:max-w-lg pr-0 lg:pr-16">
-                        <h1 className="text-5xl lg:text-6xl font-bold text-blue-600">Welcome to DairyCream</h1>
+                        <h1 className="text-5xl lg:text-6xl font-bold text-blue-600">Welcome,
+                            <span className=" text-gray-700"> {name? ` ${name} `: ""}</span> to DairyCream</h1>
                         <p className="py-6 text-lg lg:text-xl text-gray-700">
                             DairyCream is a comprehensive dairy management system designed to help farmers boost their productivity by tracking milk production, sales, inventory management, and visualization. Join us to streamline your dairy operations and achieve greater efficiency.
                         </p>

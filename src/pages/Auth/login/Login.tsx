@@ -40,10 +40,10 @@ export const Login = () => {
             const response = await loginUser(data).unwrap()
             dispatch(loginSuccess(response))
             toast.success("Login successful")
-            // console.log("Response data", response.token)
-            setTimeout(() => {
-                navigate('/')
-            }, 1000)
+            console.log("Response data", response)
+            // setTimeout(() => {
+            //     navigate('/')
+            // }, 1000)
 
 
         } catch (err: any) {

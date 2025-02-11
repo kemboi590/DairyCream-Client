@@ -23,7 +23,6 @@ export const loginAPI = createApi({
                 url: 'api/authentication/login-user',
                 method: 'POST',
                 body: user,
-                responseHandler: (response) => response.text()
             }),
         }),
     }),

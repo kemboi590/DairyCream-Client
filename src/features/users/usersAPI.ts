@@ -42,21 +42,21 @@ export const usersAPI = createApi({
         }),
         updateUser: builder.mutation<Tuser, Partial<Tuser & { id: string }>>({
             query: ({ id, ...rest }) => ({
-                url: `users/${id}`,
+                url: `api/users/${id}`,
                 method: 'PUT',
-                body: rest
+                body: { id, ...rest },
             }),
             invalidatesTags: ['Users']
         }),
         deleteUser: builder.mutation<{ success: boolean, id: string }, string>({
             query: (id) => ({
-                url: `users/${id}`,
+                url: `api/users/${id}`,
                 method: 'DELETE'
             }),
             invalidatesTags: ['Users']
         }),
         getUserById: builder.query<Tuser, string>({
-            query: (id) => `users/${id}`
+            query: (id) => `api/users/${id}`
         }),
     }),
 })
