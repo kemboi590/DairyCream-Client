@@ -16,17 +16,14 @@ export const Drawer = () => {
         <div>
             <button
                 className="lg:hidden btn btn-ghost btn-circle fixed top-4 left-4 z-50 text-white"
-                onClick={toggleDrawer}
-            >
+                onClick={toggleDrawer}>
                 <FaCircleArrowRight size={24} />
             </button>
             <div
                 className={`fixed inset-0 z-40 bg-opacity-50 transition-opacity lg:hidden ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-                onClick={toggleDrawer}
-            ></div>
+                onClick={toggleDrawer}></div>
             <div
-                className={`fixed inset-0 z-50 w-64 bg-white transform transition-transform lg:static lg:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
-            >
+                className={`fixed inset-0 z-50 w-64 h-screen bg-white transform transition-transform lg:static lg:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
                 <div className="p-4 h-full">
                     <button onClick={toggleDrawer} className='btn btn-ghost btn-circle absolute top-4 right-4 lg:hidden'>
                         <MdClose size={24} />

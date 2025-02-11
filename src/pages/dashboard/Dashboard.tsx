@@ -7,7 +7,7 @@ export const Dashboard = () => {
         <>
             <Navbar />
             <div className="flex">
-                <aside className="lg:w-64 h-screen bg-white shadow-lg">
+                <aside className="lg:w-64 h-full bg-white shadow-lg">
                     <Drawer />
                 </aside>
                 <main className="flex-1 p-4 overflow-auto">

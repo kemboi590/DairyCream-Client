@@ -29,7 +29,6 @@ const schema = yup.object().shape({
 
 const Profile = () => {
     const user = useSelector((state: RootState) => state.user);
-    const role = user.user?.role;
     const id = user.user?.id;
 
     const { data: userData, isLoading, error, refetch } = usersAPI.useGetUserByIdQuery(id as string, {
