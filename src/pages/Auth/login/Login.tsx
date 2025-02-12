@@ -26,9 +26,7 @@ const schema = yup.object().shape({
 export const Login = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    // const [loginUser] = loginAPI.useLoginUserMutation()
-    // { data: userData, isLoading, error, refetch }
-    const [loginUser, error] = loginAPI.useLoginUserMutation()
+    const [loginUser] = loginAPI.useLoginUserMutation()
 
     const [isLoggingIn, setIsLoggingIn] = useState(false)
     const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
@@ -48,9 +46,9 @@ export const Login = () => {
             dispatch(loginSuccess(response))
             toast.success("Login successful")
             console.log("Response data", response)
-            // setTimeout(() => {
-            //     navigate('/')
-            // }, 1000)
+            setTimeout(() => {
+                navigate('/dashboard/profile')
+            }, 1000)
 
 
         } catch (error: any) {
