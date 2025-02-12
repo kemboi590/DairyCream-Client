@@ -21,6 +21,7 @@ import { Inventory } from './pages/dashboard/main/Inventory.tsx'
 import Visualization from './pages/dashboard/main/Visualization.tsx'
 import Profile from './pages/dashboard/main/Profile.tsx'
 import Dashboard from './pages/dashboard/Dashboard.tsx'
+import Livestock from './pages/dashboard/main/Livestock.tsx'
 
 
 const router = createBrowserRouter([
@@ -93,6 +94,10 @@ const router = createBrowserRouter([
       {
         path: 'profile',
         element: <Profile />
+      },
+      {
+        path: 'livestock',
+        element: <Livestock />
       }
 
     ]

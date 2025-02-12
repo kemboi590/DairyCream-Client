@@ -29,7 +29,9 @@ const schema = yup.object().shape({
 
 const Profile = () => {
     const user = useSelector((state: RootState) => state.user);
+    console.log('User:', user);
     const id = user.user?.id;
+    console.log('User ID:', id);
 
     const { data: userData, isLoading, error, refetch } = usersAPI.useGetUserByIdQuery(id as string, {
         skip: !id,
@@ -107,7 +109,7 @@ const Profile = () => {
                 </div>
 
                 {isEditMode && (
-                    <div className="fixed inset-0 flex items-center justify-center bg-slate-200 bg-opacity-50 z-50 ">
+                    <div className="fixed inset-0 flex items-center justify-center z-50 ">
                         <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg">
                             <h2 className="text-2xl font-bold mb-4">Update Profile</h2>
                             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">

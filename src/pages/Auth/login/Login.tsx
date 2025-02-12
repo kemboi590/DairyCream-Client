@@ -26,7 +26,10 @@ const schema = yup.object().shape({
 export const Login = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const [loginUser] = loginAPI.useLoginUserMutation()
+    // const [loginUser] = loginAPI.useLoginUserMutation()
+    // { data: userData, isLoading, error, refetch }
+    const [loginUser, error] = loginAPI.useLoginUserMutation()
+
     const [isLoggingIn, setIsLoggingIn] = useState(false)
     const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
         resolver: yupResolver(schema)
@@ -37,6 +40,10 @@ export const Login = () => {
         try {
             // console.log("loggin in....")
             setIsLoggingIn(true)
+            // to use response.json() in the fetchBaseQuery, we use the default unwrap method
+            //exapmle of response.json() in the fetchBaseQuery
+            // responseHandler: (response) => response.json()
+
             const response = await loginUser(data).unwrap()
             dispatch(loginSuccess(response))
             toast.success("Login successful")
@@ -46,15 +53,15 @@ export const Login = () => {
             // }, 1000)
 
 
-        } catch (err: any) {
-            if ((err as any).status === 401) {
-                // console.log(err.data)
-                toast.error(err.data)
-                // console.log("Invalid credentials. Please try again.")
-
+        } catch (error: any) {
+            if (error.data) {
+                // console.log("Error", error.data)
+                toast.error(error.data)
             } else {
-                console.log("Error", err)
+                // console.log("Error", error)
+                toast.error("Cannot login at the moment. Please try again later")
             }
+
         } finally {
             setIsLoggingIn(false)
         }
