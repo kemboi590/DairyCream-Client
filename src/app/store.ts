@@ -5,7 +5,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
 import { loginAPI } from "../features/login/loginAPI";
 import { forgotPasswordAPI, resetPasswordAPI } from "../features/users/PasswordReset";
-
+import { livestockAPI } from "../features/livestock/livestockAPI";
 
 const persistConfig = {
     key: 'root',
@@ -18,6 +18,7 @@ const rootReducer = combineReducers({
     [loginAPI.reducerPath]: loginAPI.reducer,
     [forgotPasswordAPI.reducerPath]: forgotPasswordAPI.reducer,
     [resetPasswordAPI.reducerPath]: resetPasswordAPI.reducer,
+    [livestockAPI.reducerPath]: livestockAPI.reducer,
     user: userSlice
 })
 
@@ -29,6 +30,7 @@ export const store = configureStore({
         serializableCheck: false
     }).concat(usersAPI.middleware).concat(loginAPI.middleware)
         .concat(forgotPasswordAPI.middleware).concat(resetPasswordAPI.middleware)
+        .concat(livestockAPI.middleware)
 })
 
 export const persistedStore = persistStore(store)
