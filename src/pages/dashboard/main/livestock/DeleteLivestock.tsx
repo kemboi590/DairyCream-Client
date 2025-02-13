@@ -1,4 +1,4 @@
-import { livestockAPI } from '../../../features/livestock/livestockAPI';
+import { livestockAPI } from "../../../../features/livestock/livestockAPI";
 import { Toaster, toast } from 'sonner';
 
 type Livestock = {

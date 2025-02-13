@@ -10,6 +10,7 @@ export interface Tuser {
     email: string;
     password: string;
     role: string;
+    farmerId: number
 }
 
 export const usersAPI = createApi({

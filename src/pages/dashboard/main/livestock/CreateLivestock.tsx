@@ -1,26 +1,26 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { livestockAPI } from '../../../features/livestock/livestockAPI';
+import { livestockAPI } from '../../../../features/livestock/livestockAPI';
 import { Toaster, toast } from 'sonner';
 
 type Livestock = {
-    livestockId: number;
     tagNumber: string;
     breed: string;
     dateOfBirth: Date;
     healthStatus: string;
     lastVaccineDate: Date;
-  };
+    farmerId: number;
+};
 
-type EditLivestockProps = {
-    livestock: Livestock;
+type CreateLivestockProps = {
+    farmerId: number;
     onClose: () => void;
     refetch: () => void;
 };
 
 const schema = yup.object().shape({
-    livestockId: yup.number().required(),
+    farmerId: yup.number().required('Farmer ID is required'),
     tagNumber: yup.string().required('Tag Number is required'),
     breed: yup.string().required('Breed is required'),
     dateOfBirth: yup.date().required('Date of Birth is required'),
@@ -28,29 +28,32 @@ const schema = yup.object().shape({
     lastVaccineDate: yup.date().required('Last Vaccine Date is required'),
 });
 
-const EditLivestock = ({ livestock, onClose, refetch }: EditLivestockProps) => {
-    const [updateLivestock] = livestockAPI.useUpdateLivestockMutation();
+const CreateLivestock = ({ farmerId, onClose, refetch }: CreateLivestockProps) => {
+    const [createLivestock] = livestockAPI.useCreateLivestockMutation();
     const { register, handleSubmit, formState: { errors } } = useForm<Livestock>({
         resolver: yupResolver(schema),
-        defaultValues: livestock,
+        defaultValues: { farmerId } as Livestock,
     });
 
     const onSubmit: SubmitHandler<Livestock> = async (formData) => {
+        console.log("form data", formData);
         try {
-            await updateLivestock(formData).unwrap();
-            toast.success('Livestock updated successfully');
+            const res = await createLivestock(formData).unwrap();
+            console.log('Livestock created:', res);
+            toast.success('Livestock created successfully');
             refetch();
             onClose();
         } catch (err) {
-            console.error('Error updating livestock', err);
-            toast.error('Error updating livestock');
+            console.error('Error creating livestock', err);
+            toast.error('Error creating livestock');
         }
     };
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-            <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg">
-                <h2 className="text-2xl font-bold mb-4">Edit Livestock</h2>
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+            <div className="bg-slate-200 p-6 rounded-lg w-full max-w-lg shadow-xl">
+                <h2 className="text-2xl font-bold mb-4">Create Livestock</h2>
+
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                     <div className="form-control">
                         <label htmlFor="tagNumber" className="label">Tag Number</label>
@@ -79,7 +82,7 @@ const EditLivestock = ({ livestock, onClose, refetch }: EditLivestockProps) => {
                     </div>
                     <div className="mt-6 flex justify-around">
                         <button onClick={onClose} className="btn bg-red-500 text-white hover:bg-red-600">Cancel</button>
-                        <button type="submit" className="btn bg-blue-600 text-white hover:bg-blue-700">Save Changes</button>
+                        <button type="submit" className="btn bg-blue-600 text-white hover:bg-blue-700">Create Livestock</button>
                     </div>
                 </form>
             </div>
@@ -88,4 +91,4 @@ const EditLivestock = ({ livestock, onClose, refetch }: EditLivestockProps) => {
     );
 };
 
-export default EditLivestock;
+export default CreateLivestock;

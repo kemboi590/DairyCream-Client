@@ -20,11 +20,11 @@ export const drawerData: DrawerData[] = [
         link: "main"
     },
     {
-        // livestock
+        // farmer-livestock
         id: 2,
-        name: "Livestock",
+        name: "Farmer Livestock",
         icon: FaCow,
-        link: "livestock"
+        link: "farmer-livestock"
     },
     {
         // milk production
@@ -60,5 +60,12 @@ export const drawerData: DrawerData[] = [
         name: "Profile",
         icon: FaUserEdit,
         link: "profile"
-    }
+    },
+    {
+        // livestock
+        id: 8,
+        name: "Admin Livestock",
+        icon: FaCow,
+        link: "livestock"
+    },
 ]

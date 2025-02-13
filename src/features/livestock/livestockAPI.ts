@@ -3,6 +3,7 @@ import { ApiDomain } from "../../utils/ApiDomain";
 import { RootState } from "../../app/store";
 
 export type Livestock = {
+    farmerId: number;
     livestockId: number;
     tagNumber: string;
     breed: string;
@@ -39,10 +40,10 @@ export const livestockAPI = createApi({
             invalidatesTags: ['Livestock']
         }),
         updateLivestock: builder.mutation<Livestock, Partial<Livestock & { livestockId: number }>>({
-            query: ({ livestockId, ...rest }) => ({
+            query: ({ livestockId, farmerId, ...rest }) => ({
                 url: `api/livestock/${livestockId}`,
                 method: 'PUT',
-                body: { livestockId, ...rest },
+                body: { livestockId, farmerId, ...rest }, 
             }),
             invalidatesTags: ['Livestock']
         }),
@@ -55,7 +56,11 @@ export const livestockAPI = createApi({
         }),
         getLivestockById: builder.query<Livestock, number>({
             query: (livestockId) => `api/livestock/${livestockId}`
+        }),
+        getFarmerLivestock: builder.query<Livestock[], number>({
+            query: (farmerId) => `api/livestock/farmer/${farmerId}`
         })
+
     })
 });
 

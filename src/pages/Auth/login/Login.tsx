@@ -36,12 +36,7 @@ export const Login = () => {
     const onSubmit: SubmitHandler<FormData> = async (data) => {
         // console.log(data)
         try {
-            // console.log("loggin in....")
             setIsLoggingIn(true)
-            // to use response.json() in the fetchBaseQuery, we use the default unwrap method
-            //exapmle of response.json() in the fetchBaseQuery
-            // responseHandler: (response) => response.json()
-
             const response = await loginUser(data).unwrap()
             dispatch(loginSuccess(response))
             toast.success("Login successful")
