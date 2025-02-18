@@ -19,6 +19,7 @@ type Livestock = {
     dateOfBirth: Date;
     healthStatus: string;
     lastVaccineDate: Date;
+    farmerId: number;
 };
 
 const Livestock = () => {
