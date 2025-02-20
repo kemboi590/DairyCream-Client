@@ -10,8 +10,9 @@ import { Toaster } from 'sonner';
 import Footer from '../../../../components/Footer';
 
 type MilkProduction = {
+  milkProductionId: number;
   livestockId: number;
-  productionDate: Date;
+  productionDate: string;
   quantityLiters: number;
 };
 
@@ -35,7 +36,7 @@ const MilkProduction = () => {
   const handleEdit = (milkProduction: MilkProduction) => {
     setSelectedMilkProduction({
       ...milkProduction,
-      productionDate: new Date(milkProduction.productionDate),
+      productionDate: new Date(milkProduction.productionDate).toISOString().split('T')[0],
     });
     setIsEditMode(true);
   };
@@ -43,7 +44,7 @@ const MilkProduction = () => {
   const handleDelete = (milkProduction: MilkProduction) => {
     setSelectedMilkProduction({
       ...milkProduction,
-      productionDate: new Date(milkProduction.productionDate),
+      productionDate: new Date(milkProduction.productionDate).toISOString().split('T')[0],
     });
     setIsDeleteMode(true);
   };
@@ -59,7 +60,7 @@ const MilkProduction = () => {
   return (
     <>
       <Toaster />
-      <div className="container mx-auto p-8">
+      <div className="container mx-auto p-8 min-h-[80vh]">
         <h1 className="text-4xl font-bold text-blue-600 mb-8">Milk Production Management</h1>
         <div className="flex justify-end mb-4">
           <button onClick={() => setIsCreateMode(true)} className="btn bg-green-600 text-white hover:bg-green-700 flex items-center">
@@ -73,6 +74,8 @@ const MilkProduction = () => {
             <table className="table-auto w-full bg-white shadow-lg rounded-lg">
               <thead>
                 <tr className="bg-blue-600 text-white">
+
+                  <th className="px-4 py-2">ID</th>
                   <th className="px-4 py-2">Livestock ID</th>
                   <th className="px-4 py-2">Production Date</th>
                   <th className="px-4 py-2">Quantity (Liters)</th>
@@ -82,6 +85,7 @@ const MilkProduction = () => {
               <tbody>
                 {milkProductionData.map((milkProduction) => (
                   <tr key={milkProduction.livestockId} className="border-b">
+                    <td className='px-4 py-2'>{milkProduction.milkProductionId}</td>
                     <td className="px-4 py-2">{milkProduction.livestockId}</td>
                     <td className="px-4 py-2">{new Date(milkProduction.productionDate).toLocaleDateString()}</td>
                     <td className="px-4 py-2">{milkProduction.quantityLiters}</td>
@@ -120,8 +124,8 @@ const MilkProduction = () => {
       {isCreateMode && (
         <CreateMilkProduction
           farmerId={farmerId as number}
-          onClose={() => setIsCreateMode(false)}
-          refetch={refetch}
+          onClose={() => setIsCreateMode(false)} //meant to close the modal when the onClose function is called
+          refetch={refetch} //meant to refetch the data when the refetch function is called
         />
       )}
 

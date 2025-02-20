@@ -3,8 +3,9 @@ import { ApiDomain } from "../../utils/ApiDomain";
 import { RootState } from "../../app/store";
 
 export type MilkProduction = {
+    milkProductionId: number;
     livestockId: number;
-    productionDate: Date;
+    productionDate: string;
     quantityLiters: number;
     farmerId: number;
 };
@@ -41,23 +42,23 @@ export const milkProductionAPI = createApi({
             }),
             invalidatesTags: ['MilkProduction']
         }),
-        updateMilkProduction: builder.mutation<MilkProduction, Partial<MilkProduction & { livestockId: number }>>({
-            query: ({ livestockId, ...rest }) => ({
-                url: `api/milkproductions/${livestockId}`,
+        updateMilkProduction: builder.mutation<MilkProduction, Partial<MilkProduction & { milkProductionId: number }>>({
+            query: ({ livestockId, milkProductionId, ...rest }) => ({
+                url: `api/milkproductions/${milkProductionId}`,
                 method: 'PUT',
-                body: { livestockId, ...rest }
+                body: { livestockId, milkProductionId, ...rest }
             }),
             invalidatesTags: ['MilkProduction']
         }),
-        deleteMilkProduction: builder.mutation<{ success: boolean, livestockId: number }, number>({
-            query: (livestockId) => ({
-                url: `api/milkproductions/${livestockId}`,
+        deleteMilkProduction: builder.mutation<{ success: boolean, milkProductionId: number }, number>({
+            query: (milkProductionId) => ({
+                url: `api/milkproductions/${milkProductionId}`,
                 method: 'DELETE'
             }),
             invalidatesTags: ['MilkProduction']
         }),
         getMilkProductionById: builder.query<MilkProduction, number>({
-            query: (livestockId) => `api/milkproductions/${livestockId}`
+            query: (milkProductionId) => `api/milkproductions/${milkProductionId}`
         }),
         getFarmerMilkProduction: builder.query<MilkProductionResponse, number>({
             query: (farmerId) => `api/milkproductions/farmer/${farmerId}`

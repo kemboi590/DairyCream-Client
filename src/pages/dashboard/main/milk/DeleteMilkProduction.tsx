@@ -2,8 +2,9 @@ import { milkProductionAPI } from '../../../../features/milk/milkProductionAPI';
 import { Toaster, toast } from 'sonner';
 
 type MilkProduction = {
+    milkProductionId: number;
     livestockId: number;
-    productionDate: Date;
+    productionDate: string;
     quantityLiters: number;
 };
 
@@ -18,7 +19,7 @@ const DeleteMilkProduction = ({ milkProduction, onClose, refetch }: DeleteMilkPr
 
     const handleDelete = async () => {
         try {
-            await deleteMilkProduction(milkProduction.livestockId).unwrap();
+            await deleteMilkProduction(milkProduction.milkProductionId).unwrap();
             toast.success('Milk production deleted successfully');
             refetch();
             onClose();
@@ -28,8 +29,8 @@ const DeleteMilkProduction = ({ milkProduction, onClose, refetch }: DeleteMilkPr
     };
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-            <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg">
+        <div className="fixed inset-0 flex items-center justify-center bg-opacity-50 z-50">
+            <div className="bg-slate-200 p-6 rounded-lg shadow-lg w-full max-w-lg">
                 <h2 className="text-2xl font-bold mb-4">Delete Milk Production</h2>
                 <p>Are you sure you want to delete the milk production record for livestock ID {milkProduction.livestockId}?</p>
                 <div className="mt-6 flex justify-around">
