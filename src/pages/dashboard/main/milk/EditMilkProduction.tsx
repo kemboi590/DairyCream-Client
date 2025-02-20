@@ -4,6 +4,8 @@ import * as yup from 'yup';
 import { milkProductionAPI } from '../../../../features/milk/milkProductionAPI';
 import { Toaster, toast } from 'sonner';
 import { IoCloseSharp } from 'react-icons/io5';
+import { useState } from 'react';
+
 
 type MilkProduction = {
     milkProductionId: number;
@@ -27,12 +29,13 @@ const schema = yup.object().shape({
 
 
 const EditMilkProduction = ({ milkProduction, onClose, refetch }: EditMilkProductionProps) => {
+    const [isEditing, setIsEditing] = useState(false)
     const [updateMilkProduction] = milkProductionAPI.useUpdateMilkProductionMutation();
     const { register, handleSubmit, formState: { errors } } = useForm<MilkProduction>({
         resolver: yupResolver(schema),
         defaultValues: {
             ...milkProduction,
-            productionDate: new Date(milkProduction.productionDate).toISOString().split('T')[0], 
+            productionDate: new Date(milkProduction.productionDate).toISOString().split('T')[0],
         },
     });
 
@@ -41,6 +44,7 @@ const EditMilkProduction = ({ milkProduction, onClose, refetch }: EditMilkProduc
         const updateData = { milkProductionId, livestockId, productionDate, quantityLiters };
 
         try {
+            setIsEditing(true);
             const res = await updateMilkProduction(updateData).unwrap();
             console.log(res);
             toast.success('Milk production updated successfully');
@@ -48,6 +52,8 @@ const EditMilkProduction = ({ milkProduction, onClose, refetch }: EditMilkProduc
             onClose();
         } catch (err) {
             toast.error('Error updating milk production');
+        } finally {
+            setIsEditing(false);
         }
     };
 
@@ -78,7 +84,16 @@ const EditMilkProduction = ({ milkProduction, onClose, refetch }: EditMilkProduc
                     </div>
                     <div className="mt-6 flex justify-around">
                         <button onClick={onClose} className="btn bg-red-500 text-white hover:bg-red-600">Cancel</button>
-                        <button type="submit" className="btn bg-blue-600 text-white hover:bg-blue-700">Save Changes</button>
+                        <button type="submit" className="btn bg-blue-600 text-white hover:bg-blue-700">
+                            {isEditing ? (
+                                <>
+                                    <span className="loading loading-spinner"></span>
+                                    <span className='text-text-light'> Updating...</span>
+                                </>
+                            ) : (
+                                <span>Update</span>
+                            )}
+                        </button>
                     </div>
                 </form>
             </div>

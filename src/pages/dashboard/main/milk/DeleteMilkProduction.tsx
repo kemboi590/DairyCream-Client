@@ -1,5 +1,6 @@
 import { milkProductionAPI } from '../../../../features/milk/milkProductionAPI';
 import { Toaster, toast } from 'sonner';
+import { useState } from 'react';
 
 type MilkProduction = {
     milkProductionId: number;
@@ -15,16 +16,20 @@ type DeleteMilkProductionProps = {
 };
 
 const DeleteMilkProduction = ({ milkProduction, onClose, refetch }: DeleteMilkProductionProps) => {
+    const [isDeleting, setIsDeleting] = useState(false)
     const [deleteMilkProduction] = milkProductionAPI.useDeleteMilkProductionMutation();
 
     const handleDelete = async () => {
         try {
+            setIsDeleting(true);
             await deleteMilkProduction(milkProduction.milkProductionId).unwrap();
             toast.success('Milk production deleted successfully');
             refetch();
             onClose();
         } catch (err) {
             toast.error('Error deleting milk production');
+        } finally {
+            setIsDeleting(false);
         }
     };
 
@@ -35,7 +40,16 @@ const DeleteMilkProduction = ({ milkProduction, onClose, refetch }: DeleteMilkPr
                 <p>Are you sure you want to delete the milk production record for livestock ID {milkProduction.livestockId}?</p>
                 <div className="mt-6 flex justify-around">
                     <button onClick={onClose} className="btn bg-gray-500 text-white hover:bg-gray-600">Cancel</button>
-                    <button onClick={handleDelete} className="btn bg-red-600 text-white hover:bg-red-700">Delete</button>
+                    <button onClick={handleDelete} className="btn bg-red-600 text-white hover:bg-red-700">
+                        {isDeleting ? (
+                            <>
+                                <span className="loading loading-spinner"></span>
+                                <span className='text-text-light'>Deleting...</span>
+                            </>
+                        ) : (
+                            <span>Delete</span>
+                        )}
+                    </button>
                 </div>
             </div>
             <Toaster />
