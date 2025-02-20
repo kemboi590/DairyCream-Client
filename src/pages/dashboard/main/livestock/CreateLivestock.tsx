@@ -4,6 +4,7 @@ import * as yup from 'yup';
 import { livestockAPI } from '../../../../features/livestock/livestockAPI';
 import { Toaster, toast } from 'sonner';
 import { IoCloseSharp } from 'react-icons/io5';
+import { useState } from 'react';
 
 
 type Livestock = {
@@ -31,6 +32,8 @@ const schema = yup.object().shape({
 });
 
 const CreateLivestock = ({ farmerId, onClose, refetch }: CreateLivestockProps) => {
+    const [isCreating, setIsCreating] = useState(false)
+
     const [createLivestock] = livestockAPI.useCreateLivestockMutation();
     const { register, handleSubmit, formState: { errors } } = useForm<Livestock>({
         resolver: yupResolver(schema),
@@ -40,6 +43,7 @@ const CreateLivestock = ({ farmerId, onClose, refetch }: CreateLivestockProps) =
     const onSubmit: SubmitHandler<Livestock> = async (formData) => {
         console.log("form data", formData);
         try {
+            setIsCreating(true);
             const res = await createLivestock(formData).unwrap();
             console.log('Livestock created:', res);
             toast.success('Livestock created successfully');
@@ -48,6 +52,8 @@ const CreateLivestock = ({ farmerId, onClose, refetch }: CreateLivestockProps) =
         } catch (err) {
             console.error('Error creating livestock', err);
             toast.error('Error creating livestock');
+        } finally {
+            setIsCreating(false);
         }
     };
 
@@ -90,7 +96,16 @@ const CreateLivestock = ({ farmerId, onClose, refetch }: CreateLivestockProps) =
                     </div>
                     <div className="mt-6 flex justify-around">
                         <button onClick={onClose} className="btn bg-red-500 text-white hover:bg-red-600">Cancel</button>
-                        <button type="submit" className="btn bg-blue-600 text-white hover:bg-blue-700">Create Livestock</button>
+                        <button type="submit" className="btn bg-blue-600 text-white hover:bg-blue-700">
+                            {isCreating ? (
+                                <>
+                                    <span className="loading loading-spinner"></span>
+                                    <span className='text-text-light'>Creating...</span>
+                                </>
+                            ) : (
+                                <span>Create Livestock</span>
+                            )}
+                        </button>
                     </div>
                 </form>
             </div>

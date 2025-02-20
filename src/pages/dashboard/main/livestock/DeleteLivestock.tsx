@@ -1,5 +1,7 @@
 import { livestockAPI } from "../../../../features/livestock/livestockAPI";
 import { Toaster, toast } from 'sonner';
+import { useState } from 'react';
+
 
 type Livestock = {
     livestockId: number;
@@ -17,10 +19,12 @@ type DeleteLivestockProps = {
 };
 
 const DeleteLivestock = ({ livestock, onClose, refetch }: DeleteLivestockProps) => {
+    const [isDeleting, setIsDeleting] = useState(false)
     const [deleteLivestock] = livestockAPI.useDeleteLivestockMutation();
 
     const handleDelete = async () => {
         try {
+            setIsDeleting(true);
             await deleteLivestock(livestock.livestockId).unwrap();
             toast.success('Livestock deleted successfully');
             refetch();
@@ -28,6 +32,8 @@ const DeleteLivestock = ({ livestock, onClose, refetch }: DeleteLivestockProps) 
         } catch (err) {
             console.error('Error deleting livestock', err);
             toast.error('Error deleting livestock');
+        } finally {
+            setIsDeleting(false);
         }
     };
 
@@ -38,7 +44,16 @@ const DeleteLivestock = ({ livestock, onClose, refetch }: DeleteLivestockProps) 
                 <p>Are you sure you want to delete the livestock with tag number {livestock.tagNumber}?</p>
                 <div className="mt-6 flex justify-around">
                     <button onClick={onClose} className="btn bg-gray-500 text-white hover:bg-gray-600">Cancel</button>
-                    <button onClick={handleDelete} className="btn bg-red-600 text-white hover:bg-red-700">Delete</button>
+                    <button onClick={handleDelete} className="btn bg-red-600 text-white hover:bg-red-700">
+                        {isDeleting ? (
+                            <>
+                                <span className="loading loading-spinner"></span>
+                                <span className='text-text-light'>Deleting...</span>
+                            </>
+                        ) : (
+                            <span>Delete</span>
+                        )}
+                    </button>
                 </div>
             </div>
             <Toaster />

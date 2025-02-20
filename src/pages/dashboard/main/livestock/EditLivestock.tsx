@@ -4,7 +4,7 @@ import * as yup from 'yup';
 import { livestockAPI } from '../../../../features/livestock/livestockAPI';
 import { Toaster, toast } from 'sonner';
 import { IoCloseSharp } from 'react-icons/io5';
-
+import { useState } from 'react';
 
 type Livestock = {
     livestockId: number;
@@ -33,6 +33,7 @@ const schema = yup.object().shape({
 });
 
 const EditLivestock = ({ livestock, onClose, refetch }: EditLivestockProps) => {
+    const [isEditing, setIsEditing] = useState(false)
     const [updateLivestock] = livestockAPI.useUpdateLivestockMutation();
     const { register, handleSubmit, formState: { errors } } = useForm<Livestock>({
         resolver: yupResolver(schema),
@@ -47,6 +48,7 @@ const EditLivestock = ({ livestock, onClose, refetch }: EditLivestockProps) => {
         const { livestockId, tagNumber, breed, dateOfBirth, healthStatus, lastVaccineDate, farmerId } = formData;
         const updateData = { livestockId, tagNumber, breed, dateOfBirth, healthStatus, lastVaccineDate, farmerId };
         try {
+            setIsEditing(true);
             await updateLivestock(updateData).unwrap();
             toast.success('Livestock updated successfully');
             refetch();
@@ -54,6 +56,8 @@ const EditLivestock = ({ livestock, onClose, refetch }: EditLivestockProps) => {
         } catch (err) {
             // console.error('Error updating livestock', err);
             toast.error('Error updating livestock');
+        } finally {
+            setIsEditing(false);
         }
     };
 
@@ -99,7 +103,16 @@ const EditLivestock = ({ livestock, onClose, refetch }: EditLivestockProps) => {
                     </div>
                     <div className="mt-6 flex justify-around">
                         <button onClick={onClose} className="btn bg-red-500 text-white hover:bg-red-600">Cancel</button>
-                        <button type="submit" className="btn bg-blue-600 text-white hover:bg-blue-700">Save Changes</button>
+                        <button type="submit" className="btn bg-blue-600 text-white hover:bg-blue-700">
+                            {isEditing ? (
+                                <>
+                                    <span className="loading loading-spinner"></span>
+                                    <span className='text-text-light'> Updating...</span>
+                                </>
+                            ) : (
+                                <span>Save Changes</span>
+                            )}
+                        </button>
                     </div>
                 </form>
             </div>
