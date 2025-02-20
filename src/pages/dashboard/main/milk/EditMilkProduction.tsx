@@ -25,36 +25,6 @@ const schema = yup.object().shape({
     quantityLiters: yup.number().required('Quantity (Liters) is required').positive('Quantity must be positive'),
 });
 
-// const EditMilkProduction = ({ milkProduction, onClose, refetch }: EditMilkProductionProps) => {
-//     const [updateMilkProduction] = milkProductionAPI.useUpdateMilkProductionMutation();
-//     const { register, handleSubmit, formState: { errors } } = useForm<MilkProduction>({
-//         resolver: yupResolver(schema),
-//         defaultValues: {
-//             ...milkProduction,
-//             productionDate: milkProduction.productionDate.toISOString().split('T')[0], // Convert to YYYY-MM-DD format
-//         },
-//     });
-
-//     const onSubmit: SubmitHandler<MilkProduction> = async (formData) => {
-//         const { milkProductionId, livestockId, productionDate, quantityLiters } = formData;
-//         const updateData = { milkProductionId, livestockId, productionDate, quantityLiters }
-
-//         // const updateData = {
-//         //     ...formData,
-//         //     productionDate: new Date(formData.productionDate),
-//         // };
-
-//         try {
-//             const res = await updateMilkProduction(updateData).unwrap();
-//             console.log(res);
-//             toast.success('Milk production updated successfully');
-//             refetch();
-//             onClose();
-//         } catch (err) {
-//             toast.error('Error updating milk production');
-//         }
-//     };
-
 
 const EditMilkProduction = ({ milkProduction, onClose, refetch }: EditMilkProductionProps) => {
     const [updateMilkProduction] = milkProductionAPI.useUpdateMilkProductionMutation();
@@ -62,12 +32,7 @@ const EditMilkProduction = ({ milkProduction, onClose, refetch }: EditMilkProduc
         resolver: yupResolver(schema),
         defaultValues: {
             ...milkProduction,
-            productionDate: new Date(milkProduction.productionDate).toISOString().split('T')[0], // Convert to YYYY-MM-DD format
-
-            // productionDate: (typeof milkProduction.productionDate === 'string'
-            //     ? new Date(milkProduction.productionDate)
-            //     : milkProduction.productionDate
-            // ).toISOString().split('T')[0], // Convert to YYYY-MM-DD format
+            productionDate: new Date(milkProduction.productionDate).toISOString().split('T')[0], 
         },
     });
 
