@@ -3,14 +3,16 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { livestockAPI } from '../../../../features/livestock/livestockAPI';
 import { Toaster, toast } from 'sonner';
+import { IoCloseSharp } from 'react-icons/io5';
+
 
 type Livestock = {
     livestockId: number;
     tagNumber: string;
     breed: string;
-    dateOfBirth: Date;
+    dateOfBirth: string;
     healthStatus: string;
-    lastVaccineDate: Date;
+    lastVaccineDate: string;
     farmerId: number;
 };
 
@@ -24,21 +26,24 @@ const schema = yup.object().shape({
     livestockId: yup.number().required(),
     tagNumber: yup.string().required('Tag Number is required'),
     breed: yup.string().required('Breed is required'),
-    dateOfBirth: yup.date().required('Date of Birth is required'),
+    dateOfBirth: yup.string().required('Date of Birth is required'),
     healthStatus: yup.string().required('Health Status is required'),
-    lastVaccineDate: yup.date().required('Last Vaccine Date is required'),
-    farmerId: yup.number().required('Farmer ID is required'), // Ensure farmerId is included
+    lastVaccineDate: yup.string().required('Last Vaccine Date is required'),
+    farmerId: yup.number().required('Farmer ID is required'),
 });
 
 const EditLivestock = ({ livestock, onClose, refetch }: EditLivestockProps) => {
     const [updateLivestock] = livestockAPI.useUpdateLivestockMutation();
     const { register, handleSubmit, formState: { errors } } = useForm<Livestock>({
         resolver: yupResolver(schema),
-        defaultValues: livestock,
+        defaultValues: {
+            ...livestock,
+            dateOfBirth: new Date(livestock.dateOfBirth).toISOString().split('T')[0],
+            lastVaccineDate: new Date(livestock.lastVaccineDate).toISOString().split('T')[0],
+        }
     });
 
     const onSubmit: SubmitHandler<Livestock> = async (formData) => {
-        // console.log("form data", formData);
         const { livestockId, tagNumber, breed, dateOfBirth, healthStatus, lastVaccineDate, farmerId } = formData;
         const updateData = { livestockId, tagNumber, breed, dateOfBirth, healthStatus, lastVaccineDate, farmerId };
         try {
@@ -54,12 +59,17 @@ const EditLivestock = ({ livestock, onClose, refetch }: EditLivestockProps) => {
 
     return (
         <div className="fixed inset-0 flex items-center justify-center z-50">
-            <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg">
-                <h2 className="text-2xl font-bold mb-4">Edit Livestock</h2>
+            <div className="bg-slate-200 py-6 px-4 rounded-lg shadow-lg w-full max-w-lg">
+                <div className='flex justify-between items-center mb-4'>
+                    <h2 className="text-2xl font-bold">Edit Livestock</h2>
+                    <button onClick={onClose} aria-label="Close" className="text-2xl text-red-500 hover:text-red-600 p-2 rounded-full hover:bg-red-100">
+                        <IoCloseSharp />
+                    </button>
+                </div>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                     <div className="form-control">
                         <label htmlFor="tagNumber" className="label">Tag Number</label>
-                        <input type="text" id="tagNumber" className="input input-bordered" {...register("tagNumber")} />
+                        <input type="text" id="tagNumber" className="input input-bordered" {...register("tagNumber")} disabled />
                         <p className="text-red-500">{errors.tagNumber?.message}</p>
                     </div>
                     <div className="form-control">

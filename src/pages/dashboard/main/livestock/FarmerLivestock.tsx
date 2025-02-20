@@ -14,9 +14,9 @@ type Livestock = {
     livestockId: number;
     tagNumber: string;
     breed: string;
-    dateOfBirth: Date;
+    dateOfBirth: string;
     healthStatus: string;
-    lastVaccineDate: Date;
+    lastVaccineDate: string;
 };
 
 const FarmerLivestock = () => {
@@ -39,8 +39,8 @@ const FarmerLivestock = () => {
     const handleEdit = (livestock: Livestock) => {
         setSelectedLivestock({
             ...livestock,
-            dateOfBirth: new Date(livestock.dateOfBirth),
-            lastVaccineDate: new Date(livestock.lastVaccineDate),
+            dateOfBirth: new Date(livestock.dateOfBirth).toISOString().split('T')[0],
+            lastVaccineDate: new Date(livestock.lastVaccineDate).toISOString().split('T')[0],
             farmerId: farmerId as number,
         });
         setIsEditMode(true);
@@ -49,8 +49,8 @@ const FarmerLivestock = () => {
     const handleDelete = (livestock: Livestock) => {
         setSelectedLivestock({
             ...livestock,
-            dateOfBirth: new Date(livestock.dateOfBirth),
-            lastVaccineDate: new Date(livestock.lastVaccineDate),
+            dateOfBirth: new Date(livestock.dateOfBirth).toISOString().split('T')[0],
+            lastVaccineDate: new Date(livestock.lastVaccineDate).toISOString().split('T')[0],
             farmerId: farmerId as number,
         });
         setIsDeleteMode(true);

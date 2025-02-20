@@ -5,9 +5,9 @@ type Livestock = {
     livestockId: number;
     tagNumber: string;
     breed: string;
-    dateOfBirth: Date;
+    dateOfBirth: string;
     healthStatus: string;
-    lastVaccineDate: Date;
+    lastVaccineDate: string;
 };
 
 type DeleteLivestockProps = {
@@ -32,8 +32,8 @@ const DeleteLivestock = ({ livestock, onClose, refetch }: DeleteLivestockProps) 
     };
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-            <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg">
+        <div className="fixed inset-0 flex items-center justify-center bg-opacity-50 z-50">
+            <div className="bg-slate-200 p-6 rounded-lg shadow-lg w-full max-w-lg">
                 <h2 className="text-2xl font-bold mb-4">Delete Livestock</h2>
                 <p>Are you sure you want to delete the livestock with tag number {livestock.tagNumber}?</p>
                 <div className="mt-6 flex justify-around">

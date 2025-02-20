@@ -7,9 +7,9 @@ export type Livestock = {
     livestockId: number;
     tagNumber: string;
     breed: string;
-    dateOfBirth: Date;
+    dateOfBirth: string;
     healthStatus: string;
-    lastVaccineDate: Date;
+    lastVaccineDate: string;
 };
 
 export const livestockAPI = createApi({
@@ -43,7 +43,7 @@ export const livestockAPI = createApi({
             query: ({ livestockId, farmerId, ...rest }) => ({
                 url: `api/livestock/${livestockId}`,
                 method: 'PUT',
-                body: { livestockId, farmerId, ...rest }, 
+                body: { livestockId, farmerId, ...rest },
             }),
             invalidatesTags: ['Livestock']
         }),
