@@ -91,7 +91,7 @@ const EditMilkProduction = ({ milkProduction, onClose, refetch }: EditMilkProduc
                                     <span className='text-text-light'> Updating...</span>
                                 </>
                             ) : (
-                                <span>Update</span>
+                                <span>Save Changes</span>
                             )}
                         </button>
                     </div>
