@@ -4,8 +4,6 @@ import * as yup from 'yup';
 import { milkProductionAPI } from '../../../../features/milk/milkProductionAPI';
 import { Toaster, toast } from 'sonner';
 import { IoCloseSharp } from 'react-icons/io5';
-import { useState } from 'react';
-
 
 type MilkProduction = {
     livestockId: number;
@@ -28,7 +26,6 @@ const schema = yup.object().shape({
 });
 
 const CreateMilkProduction = ({ farmerId, onClose, refetch }: CreateMilkProductionProps) => {
-    const [isCreating, setIsCreating] = useState(false)
     const [createMilkProduction] = milkProductionAPI.useCreateMilkProductionMutation();
     const { register, handleSubmit, formState: { errors } } = useForm<MilkProduction>({
         resolver: yupResolver(schema),
@@ -37,15 +34,12 @@ const CreateMilkProduction = ({ farmerId, onClose, refetch }: CreateMilkProducti
 
     const onSubmit: SubmitHandler<MilkProduction> = async (formData) => {
         try {
-            setIsCreating(true);
             await createMilkProduction(formData).unwrap();
             toast.success('Milk production record created successfully');
             refetch();
             onClose();
         } catch (err) {
             toast.error('Error creating milk production record');
-        } finally {
-            setIsCreating(false);
         }
     };
 
@@ -77,17 +71,7 @@ const CreateMilkProduction = ({ farmerId, onClose, refetch }: CreateMilkProducti
                     </div>
                     <div className="mt-6 flex justify-evenly">
                         <button onClick={onClose} className="btn bg-red-500 text-white hover:bg-red-600">Cancel</button>
-                        <button type="submit" className="btn bg-blue-600 text-white hover:bg-blue-700">
-                            {isCreating ? (
-                                <>
-                                    <span className="loading loading-spinner"></span>
-                                    <span className='text-text-light'>Creating...</span>
-                                </>
-                            ) : (
-                                <span>Create Milk Production</span>
-                            )}
-
-                        </button>
+                        <button type="submit" className="btn bg-blue-600 text-white hover:bg-blue-700">Create Milk Production</button>
                     </div>
                 </form>
             </div>

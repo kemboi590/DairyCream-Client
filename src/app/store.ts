@@ -7,6 +7,7 @@ import { loginAPI } from "../features/login/loginAPI";
 import { forgotPasswordAPI, resetPasswordAPI } from "../features/users/PasswordReset";
 import { livestockAPI } from "../features/livestock/livestockAPI";
 import { milkProductionAPI } from "../features/milk/milkProductionAPI";
+import { salesAPI } from "../features/sales/salesAPI";
 
 const persistConfig = {
     key: 'root',
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
     [resetPasswordAPI.reducerPath]: resetPasswordAPI.reducer,
     [livestockAPI.reducerPath]: livestockAPI.reducer,
     [milkProductionAPI.reducerPath]: milkProductionAPI.reducer,
+    [salesAPI.reducerPath]: salesAPI.reducer,
     user: userSlice
 })
 
@@ -33,6 +35,7 @@ export const store = configureStore({
     }).concat(usersAPI.middleware).concat(loginAPI.middleware)
         .concat(forgotPasswordAPI.middleware).concat(resetPasswordAPI.middleware)
         .concat(livestockAPI.middleware).concat(milkProductionAPI.middleware)
+        .concat(salesAPI.middleware)
 })
 
 export const persistedStore = persistStore(store)
