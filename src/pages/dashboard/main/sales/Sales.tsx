@@ -8,6 +8,7 @@ import CreateSales from './CreateSales';
 import { FaEdit, FaTrash, FaPlus } from 'react-icons/fa';
 import { Toaster } from 'sonner';
 import Footer from '../../../../components/Footer';
+import SalesChart from './SalesChart';
 
 type Sale = {
     saleId: number;
@@ -72,39 +73,42 @@ const Sales = () => {
                 {!salesData.length ? (
                     <div>No sales records found.</div>
                 ) : (
-                    <div className="overflow-x-auto">
-                        <table className="table-auto w-full bg-white shadow-lg rounded-lg">
-                            <thead>
-                                <tr className="bg-blue-600 text-white">
-                                    <th className="px-4 py-2">ID</th>
-                                    <th className="px-4 py-2">Product</th>
-                                    <th className="px-4 py-2">Quantity</th>
-                                    <th className="px-4 py-2">Price Per Unit</th>
-                                    <th className="px-4 py-2">Sale Date</th>
-                                    <th className="px-4 py-2">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {salesData.map((sale) => (
-                                    <tr key={sale.saleId} className="border-b">
-                                        <td className="px-4 py-2">{sale.saleId}</td>
-                                        <td className="px-4 py-2">{sale.product}</td>
-                                        <td className="px-4 py-2">{sale.quantity}</td>
-                                        <td className="px-4 py-2">{sale.pricePerUnit}</td>
-                                        <td className="px-4 py-2">{new Date(sale.saleDate).toLocaleDateString()}</td>
-                                        <td className="px-4 py-2 flex space-x-2">
-                                            <button onClick={() => handleEdit(sale)} className="btn bg-blue-600 text-white hover:bg-blue-700">
-                                                <FaEdit />
-                                            </button>
-                                            <button onClick={() => handleDelete(sale)} className="btn bg-red-600 text-white hover:bg-red-700">
-                                                <FaTrash />
-                                            </button>
-                                        </td>
+                    <>
+                        <div className="overflow-x-auto">
+                            <table className="table-auto w-full bg-white shadow-lg rounded-lg">
+                                <thead>
+                                    <tr className="bg-blue-600 text-white">
+                                        <th className="px-4 py-2">ID</th>
+                                        <th className="px-4 py-2">Product</th>
+                                        <th className="px-4 py-2">Quantity</th>
+                                        <th className="px-4 py-2">Price Per Unit</th>
+                                        <th className="px-4 py-2">Sale Date</th>
+                                        <th className="px-4 py-2">Actions</th>
                                     </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
+                                </thead>
+                                <tbody>
+                                    {salesData.map((sale) => (
+                                        <tr key={sale.saleId} className="border-b">
+                                            <td className="px-4 py-2">{sale.saleId}</td>
+                                            <td className="px-4 py-2">{sale.product}</td>
+                                            <td className="px-4 py-2">{sale.quantity}</td>
+                                            <td className="px-4 py-2">{sale.pricePerUnit}</td>
+                                            <td className="px-4 py-2">{new Date(sale.saleDate).toLocaleDateString()}</td>
+                                            <td className="px-4 py-2 flex space-x-2">
+                                                <button onClick={() => handleEdit(sale)} className="btn bg-blue-600 text-white hover:bg-blue-700">
+                                                    <FaEdit />
+                                                </button>
+                                                <button onClick={() => handleDelete(sale)} className="btn bg-red-600 text-white hover:bg-red-700">
+                                                    <FaTrash />
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                        <SalesChart data={salesData} />
+                    </>
                 )}
             </div>
 
