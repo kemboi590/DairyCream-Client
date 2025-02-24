@@ -18,9 +18,9 @@ type Livestock = {
   livestockId: number;
   tagNumber: string;
   breed: string;
-  dateOfBirth: Date;
+  dateOfBirth: string;
   healthStatus: string;
-  lastVaccineDate: Date;
+  lastVaccineDate: string;
   farmerId: number;
 };
 

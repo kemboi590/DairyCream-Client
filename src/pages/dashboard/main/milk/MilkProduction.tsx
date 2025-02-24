@@ -8,6 +8,7 @@ import CreateMilkProduction from './CreateMilkProduction';
 import { FaEdit, FaTrash, FaPlus } from 'react-icons/fa';
 import { Toaster } from 'sonner';
 import Footer from '../../../../components/Footer';
+import MilkProductionChart from '../../../../components/visualization/MilkProductionChart';
 
 type MilkProduction = {
   milkProductionId: number;
@@ -62,19 +63,25 @@ const MilkProduction = () => {
       <Toaster />
       <div className="container mx-auto p-8 min-h-[80vh]">
         <h1 className="text-4xl font-bold text-blue-600 mb-8">Milk Production Management</h1>
+
+        {/* Create Button */}
         <div className="flex justify-end mb-4">
-          <button onClick={() => setIsCreateMode(true)} className="btn bg-green-600 text-white hover:bg-green-700 flex items-center">
+          <button
+            onClick={() => setIsCreateMode(true)}
+            className="btn bg-green-600 text-white hover:bg-green-700 flex items-center"
+          >
             <FaPlus className="mr-2" /> Create Milk Production
           </button>
         </div>
+
+        {/* Display Table */}
         {!milkProductionData.length ? (
           <div>No milk production records found.</div>
         ) : (
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto mt-8 mb-22">
             <table className="table-auto w-full bg-white shadow-lg rounded-lg">
               <thead>
                 <tr className="bg-blue-600 text-white">
-
                   <th className="px-4 py-2">ID</th>
                   <th className="px-4 py-2">Livestock ID</th>
                   <th className="px-4 py-2">Production Date</th>
@@ -85,15 +92,23 @@ const MilkProduction = () => {
               <tbody>
                 {milkProductionData.map((milkProduction) => (
                   <tr key={milkProduction.livestockId} className="border-b">
-                    <td className='px-4 py-2'>{milkProduction.milkProductionId}</td>
+                    <td className="px-4 py-2">{milkProduction.milkProductionId}</td>
                     <td className="px-4 py-2">{milkProduction.livestockId}</td>
-                    <td className="px-4 py-2">{new Date(milkProduction.productionDate).toLocaleDateString()}</td>
+                    <td className="px-4 py-2">
+                      {new Date(milkProduction.productionDate).toLocaleDateString()}
+                    </td>
                     <td className="px-4 py-2">{milkProduction.quantityLiters}</td>
                     <td className="px-4 py-2 flex space-x-2">
-                      <button onClick={() => handleEdit(milkProduction)} className="btn bg-blue-600 text-white hover:bg-blue-700">
+                      <button
+                        onClick={() => handleEdit(milkProduction)}
+                        className="btn bg-blue-600 text-white hover:bg-blue-700"
+                      >
                         <FaEdit />
                       </button>
-                      <button onClick={() => handleDelete(milkProduction)} className="btn bg-red-600 text-white hover:bg-red-700">
+                      <button
+                        onClick={() => handleDelete(milkProduction)}
+                        className="btn bg-red-600 text-white hover:bg-red-700"
+                      >
                         <FaTrash />
                       </button>
                     </td>
@@ -103,8 +118,14 @@ const MilkProduction = () => {
             </table>
           </div>
         )}
+
+       <div>
+         {/* Display Charts */}
+         {milkProductionData.length > 0 && <MilkProductionChart data={milkProductionData} />}
+       </div>
       </div>
 
+      {/* Modals for Edit, Delete, Create */}
       {isEditMode && selectedMilkProduction && (
         <EditMilkProduction
           milkProduction={selectedMilkProduction}
@@ -124,8 +145,8 @@ const MilkProduction = () => {
       {isCreateMode && (
         <CreateMilkProduction
           farmerId={farmerId as number}
-          onClose={() => setIsCreateMode(false)} //meant to close the modal when the onClose function is called
-          refetch={refetch} //meant to refetch the data when the refetch function is called
+          onClose={() => setIsCreateMode(false)}
+          refetch={refetch}
         />
       )}
 
