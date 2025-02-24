@@ -120,6 +120,7 @@ const MilkProduction = () => {
         )}
 
        <div>
+        <h1 className="text-4xl font-bold text-blue-600 mb-8">Milk Production Visualization</h1>
          {/* Display Charts */}
          {milkProductionData.length > 0 && <MilkProductionChart data={milkProductionData} />}
        </div>

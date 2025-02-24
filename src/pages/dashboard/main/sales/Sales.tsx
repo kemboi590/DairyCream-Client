@@ -107,7 +107,10 @@ const Sales = () => {
                                 </tbody>
                             </table>
                         </div>
-                        <SalesChart data={salesData} />
+                        <div>
+                            <h1 className="text-4xl font-bold text-blue-600 mb-8"> Sales Chart</h1>
+                            <SalesChart data={salesData} />
+                        </div>
                     </>
                 )}
             </div>

@@ -79,7 +79,7 @@ const FarmerLivestock = () => {
                     <div>No livestock found.</div>
                 ) : (
                     <>
-                        <div className="overflow-x-auto">
+                        <div className="overflow-x-auto mb-8">
                             <table className="table-auto w-full bg-white shadow-lg rounded-lg">
                                 <thead>
                                     <tr className="bg-blue-600 text-white">
@@ -115,7 +115,10 @@ const FarmerLivestock = () => {
                                 </tbody>
                             </table>
                         </div>
-                        <LivestockChart data={livestockData} />
+                        <div>
+                            <h1 className="text-4xl font-bold text-blue-600 mb-8"> Livestock Chart</h1>
+                            <LivestockChart data={livestockData} />
+                        </div>
                     </>
                 )}
             </div>

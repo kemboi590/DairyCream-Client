@@ -74,7 +74,7 @@ const Inventory = () => {
           <div>No inventory records found.</div>
         ) : (
           <>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto mb-8">
               <table className="table-auto w-full bg-white shadow-lg rounded-lg">
                 <thead>
                   <tr className="bg-blue-600 text-white">
@@ -107,7 +107,10 @@ const Inventory = () => {
                 </tbody>
               </table>
             </div>
-            <InventoryChart data={inventoryData} />
+            <div>
+              <h1 className="text-4xl font-bold text-blue-600 mb-8"> Inventory Chart </h1>
+              <InventoryChart data={inventoryData} />
+            </div>
           </>
         )}
       </div>
