@@ -1,6 +1,4 @@
 import { useState } from "react";
-// import { useSelector } from "react-redux";
-// import { RootState } from "../../../app/store";
 import { livestockAPI } from "../../../../features/livestock/livestockAPI";
 import EditLivestock from "./EditLivestock";
 import DeleteLivestock from "./DeleteLivestock";
@@ -38,19 +36,25 @@ const Livestock = () => {
 
   console.log("Extracted Livestock Data:", livestockData); // Debugging log
 
-  const [selectedLivestock, setSelectedLivestock] = useState<Livestock | null>(
-    null
-  );
+  const [selectedLivestock, setSelectedLivestock] = useState<Livestock | null>(null);
   const [isEditMode, setIsEditMode] = useState(false);
   const [isDeleteMode, setIsDeleteMode] = useState(false);
 
   const handleEdit = (livestock: Livestock) => {
-    setSelectedLivestock(livestock);
+    setSelectedLivestock({
+      ...livestock,
+      dateOfBirth: new Date(livestock.dateOfBirth).toISOString().split('T')[0],
+      lastVaccineDate: new Date(livestock.lastVaccineDate).toISOString().split('T')[0],
+    });
     setIsEditMode(true);
   };
 
   const handleDelete = (livestock: Livestock) => {
-    setSelectedLivestock(livestock);
+    setSelectedLivestock({
+      ...livestock,
+      dateOfBirth: new Date(livestock.dateOfBirth).toISOString().split('T')[0],
+      lastVaccineDate: new Date(livestock.lastVaccineDate).toISOString().split('T')[0],
+    });
     setIsDeleteMode(true);
   };
 
@@ -66,9 +70,7 @@ const Livestock = () => {
     <>
       <Toaster />
       <div className="container mx-auto p-8">
-        <h1 className="text-4xl font-bold text-blue-600 mb-8">
-          Livestock Management
-        </h1>
+        <h1 className="text-4xl font-bold text-blue-600 mb-8">Livestock Management</h1>
         <div className="overflow-x-auto">
           <table className="table-auto w-full bg-white shadow-lg rounded-lg">
             <thead>
@@ -86,24 +88,14 @@ const Livestock = () => {
                 <tr key={livestock.livestockId} className="border-b">
                   <td className="px-4 py-2">{livestock.tagNumber}</td>
                   <td className="px-4 py-2">{livestock.breed}</td>
-                  <td className="px-4 py-2">
-                    {new Date(livestock.dateOfBirth).toLocaleDateString()}
-                  </td>
+                  <td className="px-4 py-2">{new Date(livestock.dateOfBirth).toLocaleDateString()}</td>
                   <td className="px-4 py-2">{livestock.healthStatus}</td>
-                  <td className="px-4 py-2">
-                    {new Date(livestock.lastVaccineDate).toLocaleDateString()}
-                  </td>
+                  <td className="px-4 py-2">{new Date(livestock.lastVaccineDate).toLocaleDateString()}</td>
                   <td className="px-4 py-2 flex space-x-2">
-                    <button
-                      onClick={() => handleEdit(livestock)}
-                      className="btn bg-blue-600 text-white hover:bg-blue-700"
-                    >
+                    <button onClick={() => handleEdit(livestock)} className="btn bg-blue-600 text-white hover:bg-blue-700">
                       <FaEdit />
                     </button>
-                    <button
-                      onClick={() => handleDelete(livestock)}
-                      className="btn bg-red-600 text-white hover:bg-red-700"
-                    >
+                    <button onClick={() => handleDelete(livestock)} className="btn bg-red-600 text-white hover:bg-red-700">
                       <FaTrash />
                     </button>
                   </td>
