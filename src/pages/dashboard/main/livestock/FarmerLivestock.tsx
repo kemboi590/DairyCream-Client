@@ -8,6 +8,7 @@ import CreateLivestock from './CreateLivestock';
 import { FaEdit, FaTrash, FaPlus } from 'react-icons/fa';
 import { Toaster } from 'sonner';
 import Footer from '../../../../components/Footer';
+import LivestockChart from './LivestockChart';
 
 type Livestock = {
     farmerId: number;
@@ -77,42 +78,45 @@ const FarmerLivestock = () => {
                 {!livestockData.length ? (
                     <div>No livestock found.</div>
                 ) : (
-                    <div className="overflow-x-auto">
-                        <table className="table-auto w-full bg-white shadow-lg rounded-lg">
-                            <thead>
-                                <tr className="bg-blue-600 text-white">
-                                    <th className="px-4 py-2">Tag Number</th>
-                                    <th className="px-4 py-2">Breed</th>
-                                    <th className="px-4 py-2">Date of Birth</th>
-                                    <th className="px-4 py-2">Health Status</th>
-                                    <th className="px-4 py-2">Last Vaccine Date</th>
-                                    <th className="px-4 py-2 flex justify-between items-center">
-                                        <span>Actions</span>
+                    <>
+                        <div className="overflow-x-auto">
+                            <table className="table-auto w-full bg-white shadow-lg rounded-lg">
+                                <thead>
+                                    <tr className="bg-blue-600 text-white">
+                                        <th className="px-4 py-2">Tag Number</th>
+                                        <th className="px-4 py-2">Breed</th>
+                                        <th className="px-4 py-2">Date of Birth</th>
+                                        <th className="px-4 py-2">Health Status</th>
+                                        <th className="px-4 py-2">Last Vaccine Date</th>
+                                        <th className="px-4 py-2 flex justify-between items-center">
+                                            <span>Actions</span>
 
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {livestockData.map((livestock) => (
-                                    <tr key={livestock.livestockId} className="border-b">
-                                        <td className="px-4 py-2">{livestock.tagNumber}</td>
-                                        <td className="px-4 py-2">{livestock.breed}</td>
-                                        <td className="px-4 py-2">{new Date(livestock.dateOfBirth).toLocaleDateString()}</td>
-                                        <td className="px-4 py-2">{livestock.healthStatus}</td>
-                                        <td className="px-4 py-2">{new Date(livestock.lastVaccineDate).toLocaleDateString()}</td>
-                                        <td className="px-4 py-2 flex space-x-2">
-                                            <button onClick={() => handleEdit(livestock)} className="btn bg-blue-600 text-white hover:bg-blue-700">
-                                                <FaEdit />
-                                            </button>
-                                            <button onClick={() => handleDelete(livestock)} className="btn bg-red-600 text-white hover:bg-red-700">
-                                                <FaTrash />
-                                            </button>
-                                        </td>
+                                        </th>
                                     </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
+                                </thead>
+                                <tbody>
+                                    {livestockData.map((livestock) => (
+                                        <tr key={livestock.livestockId} className="border-b">
+                                            <td className="px-4 py-2">{livestock.tagNumber}</td>
+                                            <td className="px-4 py-2">{livestock.breed}</td>
+                                            <td className="px-4 py-2">{new Date(livestock.dateOfBirth).toLocaleDateString()}</td>
+                                            <td className="px-4 py-2">{livestock.healthStatus}</td>
+                                            <td className="px-4 py-2">{new Date(livestock.lastVaccineDate).toLocaleDateString()}</td>
+                                            <td className="px-4 py-2 flex space-x-2">
+                                                <button onClick={() => handleEdit(livestock)} className="btn bg-blue-600 text-white hover:bg-blue-700">
+                                                    <FaEdit />
+                                                </button>
+                                                <button onClick={() => handleDelete(livestock)} className="btn bg-red-600 text-white hover:bg-red-700">
+                                                    <FaTrash />
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                        <LivestockChart data={livestockData} />
+                    </>
                 )}
             </div>
 
