@@ -8,6 +8,7 @@ import CreateInventory from './CreateInventory';
 import { FaEdit, FaTrash, FaPlus } from 'react-icons/fa';
 import { Toaster } from 'sonner';
 import Footer from '../../../../components/Footer';
+import InventoryChart from './InventoryChart';
 
 type Inventory = {
   inventoryId: number;
@@ -72,39 +73,42 @@ const Inventory = () => {
         {!inventoryData.length ? (
           <div>No inventory records found.</div>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="table-auto w-full bg-white shadow-lg rounded-lg">
-              <thead>
-                <tr className="bg-blue-600 text-white">
-                  <th className="px-4 py-2">ID</th>
-                  <th className="px-4 py-2">Item Name</th>
-                  <th className="px-4 py-2">Quantity Available</th>
-                  <th className="px-4 py-2">Unit</th>
-                  <th className="px-4 py-2">Last Restocked</th>
-                  <th className="px-4 py-2">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {inventoryData.map((inventory) => (
-                  <tr key={inventory.inventoryId} className="border-b">
-                    <td className="px-4 py-2">{inventory.inventoryId}</td>
-                    <td className="px-4 py-2">{inventory.itemName}</td>
-                    <td className="px-4 py-2">{inventory.quantityAvailable}</td>
-                    <td className="px-4 py-2">{inventory.unit}</td>
-                    <td className="px-4 py-2">{new Date(inventory.lastRestocked).toLocaleDateString()}</td>
-                    <td className="px-4 py-2 flex space-x-2">
-                      <button onClick={() => handleEdit(inventory)} className="btn bg-blue-600 text-white hover:bg-blue-700">
-                        <FaEdit />
-                      </button>
-                      <button onClick={() => handleDelete(inventory)} className="btn bg-red-600 text-white hover:bg-red-700">
-                        <FaTrash />
-                      </button>
-                    </td>
+          <>
+            <div className="overflow-x-auto">
+              <table className="table-auto w-full bg-white shadow-lg rounded-lg">
+                <thead>
+                  <tr className="bg-blue-600 text-white">
+                    <th className="px-4 py-2">ID</th>
+                    <th className="px-4 py-2">Item Name</th>
+                    <th className="px-4 py-2">Quantity Available</th>
+                    <th className="px-4 py-2">Unit</th>
+                    <th className="px-4 py-2">Last Restocked</th>
+                    <th className="px-4 py-2">Actions</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {inventoryData.map((inventory) => (
+                    <tr key={inventory.inventoryId} className="border-b">
+                      <td className="px-4 py-2">{inventory.inventoryId}</td>
+                      <td className="px-4 py-2">{inventory.itemName}</td>
+                      <td className="px-4 py-2">{inventory.quantityAvailable}</td>
+                      <td className="px-4 py-2">{inventory.unit}</td>
+                      <td className="px-4 py-2">{new Date(inventory.lastRestocked).toLocaleDateString()}</td>
+                      <td className="px-4 py-2 flex space-x-2">
+                        <button onClick={() => handleEdit(inventory)} className="btn bg-blue-600 text-white hover:bg-blue-700">
+                          <FaEdit />
+                        </button>
+                        <button onClick={() => handleDelete(inventory)} className="btn bg-red-600 text-white hover:bg-red-700">
+                          <FaTrash />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <InventoryChart data={inventoryData} />
+          </>
         )}
       </div>
 
