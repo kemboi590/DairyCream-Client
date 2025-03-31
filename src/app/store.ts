@@ -8,8 +8,7 @@ import { forgotPasswordAPI, resetPasswordAPI } from "../features/users/PasswordR
 import { livestockAPI } from "../features/livestock/livestockAPI";
 import { milkProductionAPI } from "../features/milk/milkProductionAPI";
 import { salesAPI } from "../features/sales/salesAPI";
-import { inventoryAPI } from "../features/Inventory/InventoryAPI";
-
+import { inventoryAPI } from "../features/newInventory/inventoryAPI";
 
 const persistConfig = {
     key: 'root',
@@ -42,5 +41,7 @@ export const store = configureStore({
 })
 
 export const persistedStore = persistStore(store)
-export type RootState = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof store.getState> & {
+    user: { token: string }; // Ensure 'user' is typed correctly
+};
 export type AppDispatch = typeof store.dispatch

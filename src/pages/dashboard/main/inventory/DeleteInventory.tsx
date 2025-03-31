@@ -1,4 +1,4 @@
-import { inventoryAPI } from '../../../../features/Inventory/InventoryAPI';
+import { inventoryAPI } from '../../../../features/newInventory/inventoryAPI';
 import { Toaster, toast } from 'sonner';
 import { useState } from 'react';
 

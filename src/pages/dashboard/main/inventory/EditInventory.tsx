@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { inventoryAPI } from '../../../../features/Inventory/InventoryAPI';
+import { inventoryAPI } from '../../../../features/newInventory/inventoryAPI';
 import { Toaster, toast } from 'sonner';
 import { IoCloseSharp } from 'react-icons/io5';
 import { useState } from 'react';

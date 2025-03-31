@@ -3,7 +3,7 @@ import { RootState } from '../../../app/store';
 import { livestockAPI } from '../../../features/livestock/livestockAPI';
 import { salesAPI } from '../../../features/sales/salesAPI';
 import { milkProductionAPI } from '../../../features/milk/milkProductionAPI';
-import { inventoryAPI } from '../../../features/Inventory/InventoryAPI';
+import { inventoryAPI } from '../../../features/newInventory/inventoryAPI';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import Footer from '../../../components/Footer';
 

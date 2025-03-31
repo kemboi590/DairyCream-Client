@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../app/store';
-import { inventoryAPI } from '../../../../features/Inventory/InventoryAPI';
+import { inventoryAPI } from '../../../../features/newInventory/inventoryAPI';
 import EditInventory from './EditInventory';
 import DeleteInventory from './DeleteInventory';
 import CreateInventory from './CreateInventory';
