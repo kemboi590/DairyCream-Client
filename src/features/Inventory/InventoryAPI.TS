@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { ApiDomain } from "../../utils/ApiDomain";
 import { RootState } from "../../app/store";
 
+// items
 export type Inventory = {
     inventoryId: number;
     farmerId: number;
