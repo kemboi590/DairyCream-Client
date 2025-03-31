@@ -22,6 +22,7 @@ import Visualization from './pages/dashboard/main/Visualization.tsx'
 import Profile from './pages/dashboard/main/Profile.tsx'
 import Dashboard from './pages/dashboard/Dashboard.tsx'
 import Livestock from './pages/dashboard/main/livestock/Livestock.tsx'
+// import Livestock from './pages/dashboard/main/livestock/Livestock.tsx'
 import FarmerLivestock from './pages/dashboard/main/livestock/FarmerLivestock.tsx'
 
 
