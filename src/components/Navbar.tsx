@@ -3,7 +3,13 @@ import { Link } from 'react-router-dom'
 import { FaBars } from "react-icons/fa6";
 import { MdClose } from "react-icons/md";
 
+import { RootState } from '../app/store';
+import { useSelector } from 'react-redux';
+
 export const Navbar = () => {
+  const user = useSelector((state: RootState) => state.user);
+  const isLoggedIn = !!user?.token;
+
   const [isOpen, setIsOpen] = useState(false)
 
   const toggleMenu = () => {
@@ -33,8 +39,14 @@ export const Navbar = () => {
           <li className='textarea-lg'><Link to="/about-us" className='text-white'>About</Link></li>
           <li className='textarea-lg'><Link to="/dashboard" className='text-white'>Dashboard</Link></li>
           <li className='textarea-lg'><Link to="/contact-us" className='text-white'>Contact</Link></li>
-          <li className='textarea-lg'><Link to="/register" className='text-white'>Register</Link></li>
-          <li className='textarea-lg'><Link to="/login" className='text-white'>Login</Link></li>
+          {isLoggedIn ? (
+            <li className='textarea-lg'><Link to="/dashboard/profile" className='text-white'>Profile</Link></li>
+          ) : (
+            <>
+              <li className='textarea-lg'><Link to="/register" className='text-white'>Register</Link></li>
+              <li className='textarea-lg'><Link to="/login" className='text-white'>Login</Link></li>
+            </>
+          )}
         </ul>
       </div>
 
@@ -50,8 +62,14 @@ export const Navbar = () => {
           <li className='textarea-lg'><Link to="/about-us" onClick={toggleMenu} className='text-white'>About</Link></li>
           <li className='textarea-lg'><Link to="/dashboard" onClick={toggleMenu} className='text-white'>Dashboard</Link></li>
           <li className='textarea-lg'><Link to="/contact-us" onClick={toggleMenu} className='text-white'>Contact</Link></li>
-          <li className='textarea-lg'><Link to="/register" onClick={toggleMenu} className='text-white'>Register</Link></li>
-          <li className='textarea-lg'><Link to="/login" onClick={toggleMenu} className='text-white'>Login</Link></li>
+          {isLoggedIn ? (
+            <li className='textarea-lg'><Link to="/dashboard/profile" onClick={toggleMenu} className='text-white'>Profile</Link></li>
+          ) : (
+            <>
+              <li className='textarea-lg'><Link to="/register" onClick={toggleMenu} className='text-white'>Register</Link></li>
+              <li className='textarea-lg'><Link to="/login" onClick={toggleMenu} className='text-white'>Login</Link></li>
+            </>
+          )}
         </ul>
       </div>
     </div>

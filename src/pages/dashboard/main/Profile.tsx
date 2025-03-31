@@ -8,6 +8,9 @@ import { useSelector } from 'react-redux';
 import { Toaster, toast } from 'sonner';
 import Footer from '../../../components/Footer';
 import UserIMG from '../../../assets/images/testomonials/user.jpg';
+import { useDispatch } from "react-redux";
+import { logOut } from '../../../features/users/userSlice';
+import { useNavigate } from 'react-router-dom';
 
 type UserFormData = {
     id: string;
@@ -28,6 +31,8 @@ const schema = yup.object().shape({
 });
 
 const Profile = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const user = useSelector((state: RootState) => state.user);
     const id = user.user?.id;
 
@@ -86,6 +91,10 @@ const Profile = () => {
         return <div>No user data available.</div>;
     }
 
+    const handleLogout = () => {
+        dispatch(logOut());
+        navigate('/login');
+    }
     return (
         <>
 
@@ -99,6 +108,10 @@ const Profile = () => {
                         <p className="text-lg text-gray-700 mt-2">Email: {userData.email}</p>
                         <p className="text-lg text-gray-700">Username: {userData.userName}</p>
                         <p className="text-lg text-gray-700">Role: {userData.role}</p>
+                    </div>
+                    {/* add Logout btn */}
+                    <div className="flex justify-center mt-4">
+                        <button onClick={handleLogout} className="btn bg-red-500 text-white hover:bg-red-600">Logout</button>
                     </div>
                 </div>
 
