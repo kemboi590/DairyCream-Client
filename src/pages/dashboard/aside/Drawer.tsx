@@ -23,16 +23,16 @@ export const Drawer = () => {
                 className={`fixed inset-0 z-40 bg-opacity-50 transition-opacity lg:hidden ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
                 onClick={toggleDrawer}></div>
             <div
-                className={`fixed inset-0 z-50 w-64 h-screen bg-white transform transition-transform lg:static lg:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+                className={`fixed inset-0 z-50 w-64 h-screen bg-gray-600 transform transition-transform lg:static lg:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
                 <div className="p-4 h-full">
                     <button onClick={toggleDrawer} className='btn btn-ghost btn-circle absolute top-4 right-4 lg:hidden'>
                         <MdClose size={24} />
                     </button>
-                    <h2 className="text-2xl font-bold mb-4">Menu</h2>
+                    <h2 className="text-2xl font-bold mb-4 text-white">Menu</h2>
                     <ul className="menu">
                         {drawerData.map((item) => (
                             <li key={item.id}>
-                                <Link to={item.link} className="flex items-center space-x-2 border-b-2 border-transparent hover:border-blue-600" onClick={toggleDrawer}>
+                                <Link to={item.link} className="flex items-center space-x-2 border-b-2 border-transparent hover:border-blue-600 text-white" onClick={toggleDrawer}>
                                     <item.icon size={20} />
                                     <span className="text-lg ">
                                         {item.name}</span>
