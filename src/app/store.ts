@@ -9,6 +9,7 @@ import { livestockAPI } from "../features/livestock/livestockAPI";
 import { milkProductionAPI } from "../features/milk/milkProductionAPI";
 import { salesAPI } from "../features/sales/salesAPI";
 import { inventoryAPI } from "../features/newInventory/inventoryAPI";
+import tokenExpirationMiddleware from "../features/users/middleware";
 
 const persistConfig = {
     key: 'root',
@@ -34,10 +35,16 @@ export const store = configureStore({
     reducer: persistedReducer,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck: false
-    }).concat(usersAPI.middleware).concat(loginAPI.middleware)
-        .concat(forgotPasswordAPI.middleware).concat(resetPasswordAPI.middleware)
-        .concat(livestockAPI.middleware).concat(milkProductionAPI.middleware)
-        .concat(salesAPI.middleware).concat(inventoryAPI.middleware)
+    })
+        .concat(tokenExpirationMiddleware) // Add the middleware here
+        .concat(usersAPI.middleware)
+        .concat(loginAPI.middleware)
+        .concat(forgotPasswordAPI.middleware)
+        .concat(resetPasswordAPI.middleware)
+        .concat(livestockAPI.middleware)
+        .concat(milkProductionAPI.middleware)
+        .concat(salesAPI.middleware)
+        .concat(inventoryAPI.middleware)
 })
 
 export const persistedStore = persistStore(store)

@@ -1,7 +1,7 @@
 import { FaChartLine, FaCow } from "react-icons/fa6";
 import { LuMilk } from "react-icons/lu";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
-import { MdOutlineInventory, MdAutoGraph } from "react-icons/md";
+import { MdOutlineInventory } from "react-icons/md";
 import { FaUserEdit } from "react-icons/fa";
 
 export type DrawerData = {
@@ -47,25 +47,25 @@ export const drawerData: DrawerData[] = [
         icon: MdOutlineInventory,
         link: "inventory-management"
     },
-    {
-        // visualization
-        id: 6,
-        name: "Visualization",
-        icon: MdAutoGraph,
-        link: "visualization"
-    },
+    // {
+    //     // visualization
+    //     id: 6,
+    //     name: "Visualization",
+    //     icon: MdAutoGraph,
+    //     link: "visualization"
+    // },
     {
         //profile
         id: 7,
         name: "Profile",
         icon: FaUserEdit,
         link: "profile"
-    },
-    {
-        // livestock
-        id: 8,
-        name: "Admin Livestock",
-        icon: FaCow,
-        link: "livestock"
-    },
+    }
+    // {
+    //     // livestock
+    //     id: 8,
+    //     name: "Admin Livestock",
+    //     icon: FaCow,
+    //     link: "livestock"
+    // },
 ]

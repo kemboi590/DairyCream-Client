@@ -1,20 +1,21 @@
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../app/store';
-import { livestockAPI } from '../../../features/livestock/livestockAPI';
+// import { livestockAPI } from '../../../features/livestock/livestockAPI';
 import { salesAPI } from '../../../features/sales/salesAPI';
 import { milkProductionAPI } from '../../../features/milk/milkProductionAPI';
 import { inventoryAPI } from '../../../features/newInventory/inventoryAPI';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import Footer from '../../../components/Footer';
 
+// MMM
 const Main = () => {
   const user = useSelector((state: RootState) => state.user);
   const farmerId = user.user?.farmerId;
 
-  const { data: livestockResponse } = livestockAPI.useGetFarmerLivestockQuery(farmerId as number, {
-    skip: !farmerId,
-    refetchOnMountOrArgChange: true,
-  });
+  // const { data: livestockResponse } = livestockAPI.useGetFarmerLivestockQuery(farmerId as number, {
+  //   skip: !farmerId,
+  //   refetchOnMountOrArgChange: true,
+  // });
 
   const { data: salesResponse } = salesAPI.useGetFarmerSalesQuery(farmerId as number, {
     skip: !farmerId,
@@ -31,7 +32,7 @@ const Main = () => {
     refetchOnMountOrArgChange: true,
   });
 
-  const livestockData = livestockResponse?.values ?? [];
+  // const livestockData = livestockResponse?.values ?? [];
   const salesData = salesResponse?.$values ?? [];
   const milkProductionData = milkProductionResponse?.$values ?? [];
   const inventoryData = inventoryResponse?.$values ?? [];
@@ -40,12 +41,12 @@ const Main = () => {
     <>
       <div className="container mx-auto p-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <div className="card bg-blue-600 text-white shadow-lg">
+          {/* <div className="card bg-blue-600 text-white shadow-lg">
             <div className="card-body">
               <h2 className="card-title">Livestock</h2>
               <p className="text-4xl">{livestockData.length}</p>
             </div>
-          </div>
+          </div> */}
           <div className="card bg-green-600 text-white shadow-lg">
             <div className="card-body">
               <h2 className="card-title">Sales</h2>

@@ -37,7 +37,7 @@ export const Navbar = () => {
         <ul className='menu menu-horizontal px-1 hidden lg:flex'>
           <li className='textarea-lg'> <Link to="/" className='text-white'>Home</Link></li>
           <li className='textarea-lg'><Link to="/about-us" className='text-white'>About</Link></li>
-          <li className='textarea-lg'><Link to="/dashboard" className='text-white'>Dashboard</Link></li>
+          <li className='textarea-lg'><Link to="/dashboard/main" className='text-white'>Dashboard</Link></li>
           <li className='textarea-lg'><Link to="/contact-us" className='text-white'>Contact</Link></li>
           {isLoggedIn ? (
             <li className='textarea-lg'><Link to="/dashboard/profile" className='text-white'>Profile</Link></li>
@@ -60,7 +60,7 @@ export const Navbar = () => {
           <li className='textarea-lg'>
             <Link to="/" onClick={toggleMenu} className='text-white'>Home</Link></li>
           <li className='textarea-lg'><Link to="/about-us" onClick={toggleMenu} className='text-white'>About</Link></li>
-          <li className='textarea-lg'><Link to="/dashboard" onClick={toggleMenu} className='text-white'>Dashboard</Link></li>
+          <li className='textarea-lg'><Link to="/dashboard/main" onClick={toggleMenu} className='text-white'>Dashboard</Link></li>
           <li className='textarea-lg'><Link to="/contact-us" onClick={toggleMenu} className='text-white'>Contact</Link></li>
           {isLoggedIn ? (
             <li className='textarea-lg'><Link to="/dashboard/profile" onClick={toggleMenu} className='text-white'>Profile</Link></li>

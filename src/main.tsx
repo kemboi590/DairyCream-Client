@@ -18,7 +18,6 @@ import Main from './pages/dashboard/main/Main.tsx'
 import MilkProduction from './pages/dashboard/main/milk/MilkProduction.tsx'
 import Sales from './pages/dashboard/main/sales/Sales.tsx'
 import Inventory from './pages/dashboard/main/inventory/Inventory.tsx'
-import Visualization from './pages/dashboard/main/Visualization.tsx'
 import Profile from './pages/dashboard/main/Profile.tsx'
 import Dashboard from './pages/dashboard/Dashboard.tsx'
 import Livestock from './pages/dashboard/main/livestock/Livestock.tsx'
@@ -88,10 +87,6 @@ const router = createBrowserRouter([
       {
         path: 'inventory-management',
         element: <Inventory />
-      },
-      {
-        path: 'visualization',
-        element: <Visualization />
       },
       {
         path: 'profile',
